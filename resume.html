@@ -523,9 +523,8 @@
     <header>
         <div class="header-content">
             <h1>Tomáš Novotný</h1>
-            <p class="tagline">Knowledge engineering graduate student with hands-on experience in optimization, applied
-                AI,
-                and product development.</p>
+            <p class="tagline">Highly organized, hard-working and communicative engineer with a strong mathematical
+                foundation and with hands-on experience in optimization, applied AI, and software development.</p>
             <p>
                 <a href="mailto:tomnovota@seznam.cz" style="color:#fff;">tomnovota@seznam.cz</a> ·
                 <a href="tel:+420792342131" style="color:#fff;">(+420) 792 342 131</a> ·
@@ -544,12 +543,6 @@
         <nav data-auto-nav></nav>
 
         <div class="content">
-            <section id="summary">
-                <h2>Summary</h2>
-                <p>Highly organized and hard-working engineer with a strong mathematical foundation and experience in
-                    software development and AI research.</p>
-            </section>
-
             <section id="experience">
                 <h2>Professional Experience</h2>
                 <div class="item">
@@ -634,11 +627,11 @@
                 </div>
             </section>
 
-            <section id="projects">
+            <!-- <section id="projects">
                 <h2>Projects Portfolio</h2>
                 <p>Portfolio section in progress.</p>
             </section>
-
+ -->
             <section id="publications">
                 <h2>Publications</h2>
                 <div class="item">
@@ -737,11 +730,12 @@
                 <p>
                 <div class="chips">
                     <span class="chip">Machine Learning</span>
-                    <span class="chip">Knowledge-based Systems</span>
-                    <span class="chip">Agent-based Models</span>
                     <span class="chip">Data Science</span>
                     <span class="chip">Optimization</span>
                     <span class="chip">Machine Vision</span>
+                    <span class="chip">App Development</span>
+                    <span class="chip">Knowledge-based Systems</span>
+                    <span class="chip">Agent-based Models</span>
                     <span class="chip">Stochastic Processes</span>
                 </div>
                 </p>
@@ -779,18 +773,16 @@
         const nav = document.querySelector("nav[data-auto-nav]");
         const allSections = Array.from(document.querySelectorAll("main section[id]"));
         const content = document.querySelector(".content");
-        const summarySection = document.querySelector("#summary");
         const skillsContainer = document.querySelector("aside.sticky-panel");
         const skillsSection = skillsContainer?.querySelector("#skills") || null;
         const narrowLayoutQuery = window.matchMedia ? window.matchMedia("(max-width: 960px)") : null;
         let navLinks = [];
 
-        const placeSkillsSection = (isNarrow) => {
-            if (!skillsContainer || !skillsSection || !summarySection || !content) return;
-            if (isNarrow) {
-                if (skillsSection.parentElement !== content) {
-                    summarySection.insertAdjacentElement("afterend", skillsSection);
-                }
+        const placeSkillsSection = (shouldInline) => {
+            if (!skillsContainer || !skillsSection || !content) return;
+            if (shouldInline) {
+                // Keep skills visible at the top when the layout collapses to a single column.
+                content.insertAdjacentElement("afterbegin", skillsSection);
                 skillsContainer.style.display = "none";
             } else {
                 if (skillsSection.parentElement !== skillsContainer) {
@@ -867,6 +859,7 @@
         const collapsibleSections = Array.from(document.querySelectorAll("details"));
 
         const beforePrint = () => {
+            placeSkillsSection(true);
             collapsibleSections.forEach(section => {
                 section.dataset.wasOpen = section.open ? "true" : "false";
                 if (!section.open) {
@@ -882,6 +875,7 @@
                 }
                 delete section.dataset.wasOpen;
             });
+            placeSkillsSection(narrowLayoutQuery ? narrowLayoutQuery.matches : window.innerWidth <= 960);
         };
 
         if (downloadButton) {
