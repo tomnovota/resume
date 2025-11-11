@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Tomáš Novotný · Resume</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <style>
+        :root {
+            color-scheme: light dark;
+            font-family: "Inter", system-ui, sans-serif;
+            line-height: 1.5;
+            --header-height: 0px;
+        }
+
+        body {
+            margin: 0;
+            background: #f5f7fa;
+            color: #1c1f26;
+        }
+
+        header {
+            padding: 2.5rem clamp(1.5rem, 3vw, 3rem) 1.5rem;
+            background: linear-gradient(160deg, #3a7bd5, #00d2ff);
+            color: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 12px 24px rgba(15, 44, 71, .2);
+            display: grid;
+            grid-template-columns: auto minmax(0, 1fr);
+            gap: 2rem;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0 0 .4rem;
+            font-size: 2.5rem;
+        }
+
+        header .tagline {
+            font-weight: 500;
+            max-width: 48rem;
+        }
+
+        .header-content {
+            max-width: 48rem;
+        }
+
+        .header-actions {
+            margin-top: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: .75rem;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #ffffff, #dce9ff);
+            color: #1c3a6a;
+            border: 1px solid rgba(28, 58, 106, .2);
+            border-radius: 12px;
+            padding: .6rem 1.2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform .15s ease, box-shadow .15s ease;
+            box-shadow: 0 10px 20px rgba(15, 44, 71, .16);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(15, 44, 71, .22);
+        }
+
+        .profile-photo {
+            width: clamp(120px, 18vw, 180px);
+            aspect-ratio: 1;
+            border-radius: 20px;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, .6);
+            box-shadow: 0 12px 24px rgba(12, 34, 56, .25);
+            justify-self: start;
+            order: -1;
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: minmax(16rem, 22rem) minmax(0, 1fr);
+            gap: 2rem;
+            padding: 2rem clamp(1.5rem, 2vw, 3rem);
+            align-items: start;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 14px 32px rgba(15, 44, 71, .1);
+            padding: 1.5rem;
+            position: sticky;
+            top: calc(var(--header-height) + 1.5rem);
+            align-self: start;
+            max-height: calc(100vh - 3rem);
+            overflow: auto;
+            z-index: 5;
+        }
+
+        nav a {
+            display: block;
+            padding: .35rem .75rem;
+            color: inherit;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        nav a.active {
+            background: rgba(58, 123, 213, .16);
+            color: #295694;
+            border-radius: 10px;
+        }
+
+        section {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 14px 32px rgba(15, 44, 71, .08);
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+            scroll-margin-top: calc(var(--header-height) + 2rem);
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+
+        .item {
+            display: grid;
+            gap: .25rem;
+            margin-bottom: 1rem;
+            border-left: 3px solid #3a7bd5;
+            padding-left: 1rem;
+        }
+
+        .item:last-child {
+            margin-bottom: 0;
+        }
+
+        .meta {
+            font-size: .9rem;
+            color: #586174;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+        }
+
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .4rem;
+            margin-top: .75rem;
+        }
+
+        .chip {
+            background: rgba(58, 123, 213, .12);
+            color: #295694;
+            font-size: .85rem;
+            padding: .25rem .75rem;
+            border-radius: 999px;
+        }
+
+        details {
+            margin-bottom: 1rem;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            font-size: .9rem;
+            color: #6b768b;
+        }
+
+        @media print {
+            :root {
+                color-scheme: light;
+            }
+
+            @page {
+                margin: 1in;
+            }
+
+            body {
+                background: #fff;
+                color: #000;
+                font-size: 11pt;
+            }
+
+            header {
+                background: none;
+                color: #000;
+                position: static;
+                box-shadow: none;
+                grid-template-columns: minmax(0, 1fr) auto;
+                padding: 0 0 1.5rem;
+                gap: 1rem;
+            }
+
+            header a {
+                color: inherit !important;
+            }
+
+            .profile-photo {
+                border: none;
+                box-shadow: none;
+                order: 1;
+            }
+
+            nav,
+            .download-btn,
+            footer {
+                display: none !important;
+            }
+
+            main {
+                grid-template-columns: 1fr;
+                padding: 0;
+                gap: 0;
+            }
+
+            .content {
+                gap: 1.25rem;
+            }
+
+            section {
+                background: none;
+                border-radius: 0;
+                box-shadow: none;
+                padding: 0;
+                margin: 0;
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            .item {
+                border-left-color: #1c1f26;
+                padding-left: .75rem;
+            }
+
+            h2 {
+                margin-bottom: .6rem;
+                font-size: 1.35rem;
+            }
+
+            details {
+                margin-bottom: .6rem;
+            }
+
+            a {
+                color: inherit;
+                text-decoration: none;
+            }
+        }
+
+        @media (max-width: 960px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                position: static;
+            }
+
+            header {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 1.75rem clamp(1rem, 4vw, 2rem) 1.25rem;
+            }
+
+            header h1 {
+                font-size: clamp(1.9rem, 6vw, 2.3rem);
+            }
+
+            .header-content {
+                justify-self: center;
+                margin: 0 auto;
+            }
+
+            .header-actions {
+                justify-content: center;
+            }
+
+            .profile-photo {
+                justify-self: center;
+                margin: 1.5rem auto 0;
+                width: clamp(100px, 40vw, 140px);
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 1.1rem clamp(.85rem, 6vw, 1.4rem) .9rem;
+                gap: 1rem;
+            }
+
+            header h1 {
+                font-size: clamp(1.6rem, 7vw, 2rem);
+            }
+
+            header .tagline {
+                font-size: .95rem;
+            }
+
+            header p {
+                margin: .4rem 0;
+            }
+
+            .header-actions {
+                margin-top: .5rem;
+            }
+
+            .profile-photo {
+                width: clamp(80px, 32vw, 110px);
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Tomáš Novotný</h1>
+            <p class="tagline">Knowledge engineering graduate student with hands-on experience in optimization, applied
+                AI,
+                and product development.</p>
+            <p>
+                <a href="mailto:tomnovota@seznam.cz" style="color:#fff;">tomnovota@seznam.cz</a> ·
+                <a href="tel:+420792342131" style="color:#fff;">(+420) 792 342 131</a> ·
+                <a href="https://www.linkedin.com/in/tomnovota/" style="color:#fff;">LinkedIn</a> ·
+                <a href="https://github.com/tomnovota" style="color:#fff;">GitHub</a> ·
+                Prague, Czechia
+            </p>
+            <div class="header-actions">
+                <button type="button" class="download-btn" id="download-pdf">Download PDF</button>
+            </div>
+        </div>
+        <img class="profile-photo" src="received_1389297735697158.jpeg" alt="Portrait of Tomáš Novotný" />
+    </header>
+
+    <main>
+        <nav>
+            <a href="#summary">Summary</a>
+            <a href="#education">Education</a>
+            <a href="#experience">Professional Experience</a>
+            <a href="#freelance">Freelance Experience</a>
+            <a href="#publications">Publications</a>
+            <a href="#self-development">Self-development</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects Portfolio</a>
+            <a href="#honors">Honors &amp; Awards</a>
+            <a href="#teaching">Teaching Experience</a>
+            <a href="#other-work">Other Work</a>
+            <a href="#volunteering">Volunteering</a>
+            <a href="#hobbies">Hobbies</a>
+        </nav>
+
+        <div class="content">
+            <section id="summary">
+                <h2>Summary</h2>
+                <p>Highly organized and hard-working engineer with a strong mathematical foundation and experience in
+                    software development and AI research.</p>
+            </section>
+
+            <section id="education">
+                <h2>Education</h2>
+                <div class="item">
+                    <div class="meta">Jun 2024 – Present · Prague</div>
+                    <strong>Master of Science, Knowledge Engineering</strong>
+                    <span>Czech Technical University, Faculty of Information Technology</span>
+                </div>
+                <div class="item">
+                    <div class="meta">Sep 2021 – Jun 2024 · Prague</div>
+                    <strong>Bachelor of Science, Artificial Intelligence</strong>
+                    <span>Czech Technical University, Faculty of Information Technology</span>
+                </div>
+                <div class="item">
+                    <div class="meta">Sep 2013 – Jun 2021 · České Budějovice</div>
+                    <strong>Gymnázium České Budějovice, Česká 64</strong>
+                </div>
+            </section>
+
+            <section id="experience">
+                <h2>Professional Experience</h2>
+                <div class="item">
+                    <div class="meta">Jul 2024 – Present · Prague</div>
+                    <strong>Developer, Blindspot Solutions</strong>
+                    <span>Model optimization problems and build web applications in Kotlin for enterprise
+                        clients.</span>
+                </div>
+                <div class="item">
+                    <div class="meta">Oct 2022 – Jun 2023 · České Budějovice</div>
+                    <strong>Intern, Bosch</strong>
+                    <span>Enhanced computer and machine vision tooling; improved transfer learning scripts and delivered
+                        a Python-based GUI.</span>
+                </div>
+                <div class="item">
+                    <div class="meta">Dec 2021 – Sep 2022 · Prague</div>
+                    <strong>IT Technician, SP-IT Limited</strong>
+                    <span>Diagnosed hardware/software issues, performed repairs, prophylaxis, and network
+                        maintenance.</span>
+                </div>
+                <div class="item">
+                    <div class="meta">Apr 2018 – Feb 2021 · České Budějovice</div>
+                    <strong>Technical Support Operator, STARNET</strong>
+                    <span>Resolved customer connectivity problems and coordinated service escalations.</span>
+                </div>
+            </section>
+
+            <section id="freelance">
+                <h2>Freelance Experience</h2>
+                <div class="item">
+                    <div class="meta">2024 – Present · Prague</div>
+                    <strong>AI dětem</strong>
+                    <span>Built a web application to manage questionnaires and data collection pipelines.</span>
+                </div>
+                <div class="item">
+                    <div class="meta">Jun 2025 · Prague</div>
+                    <strong>AI Training for Employees, ECOM s.r.o.</strong>
+                    <span>Designed and delivered practical AI upskilling workshops.</span>
+                </div>
+                <div class="item">
+                    <div class="meta">2024 · Prague</div>
+                    <strong>Business Analysis & Solution Proposal, Heli</strong>
+                    <span>Conducted business discovery and recommended data-driven solutions.</span>
+                </div>
+            </section>
+
+            <section id="publications">
+                <h2>Publications</h2>
+                <div class="item">
+                    <strong>Kernel Estimates of Pedestrian Density Applied in Simulation of Recreational Pedestrian
+                        Movement</strong>
+                    <a href="https://doi.org/10.1007/978-3-031-85703-4_23">doi:10.1007/978-3-031-85703-4_23</a>
+                </div>
+            </section>
+
+            <section id="self-development">
+                <h2>Self-development</h2>
+                <div class="item">
+                    <div class="meta">2025 – Present · Prague</div><strong>prg.ai Industry Talks</strong><span>Tech
+                        industry insights</span>
+                </div>
+                <div class="item">
+                    <div class="meta">2025 – Present · Prague</div><strong>MSD Meetups</strong><span>Machine learning
+                        community events</span>
+                </div>
+                <div class="item">
+                    <div class="meta">2025 · Prague</div><strong>Synapse Conference</strong><span>AI & technology
+                        conference</span>
+                </div>
+                <div class="item">
+                    <div class="meta">2024 · Ostrava</div><strong>PPAM 2024 Conference</strong><span>Presented research
+                        paper</span>
+                </div>
+                <div class="item">
+                    <div class="meta">2024 · Czechia</div><strong>SVOČ</strong><span>Czech Student Scientific
+                        Competition</span>
+                </div>
+            </section>
+
+            <section id="skills">
+                <h2>Skills</h2>
+                <details open>
+                    <summary>Field of Study</summary>
+                    <div class="chips">
+                        <span class="chip">Machine Learning</span>
+                        <span class="chip">Knowledge-based Systems</span>
+                        <span class="chip">Agent-based Models</span>
+                        <span class="chip">Data Science</span>
+                        <span class="chip">Optimization</span>
+                        <span class="chip">Machine Vision</span>
+                        <span class="chip">Stochastic Processes and Simulation</span>
+                    </div>
+                </details>
+                <details>
+                    <summary>Programming & Scripting</summary>
+                    <p><strong>Experienced:</strong> C/C++, Python, Kotlin</p>
+                    <p><strong>Familiar:</strong> Julia, R, PostgreSQL, Bash</p>
+                </details>
+                <details>
+                    <summary>Tools & Libraries</summary>
+                    <p>Git, Conda, Docker, Jupyter</p>
+                    <p><strong>Libraries:</strong> scikit-learn, PyTorch, pandas, Matplotlib, OpenCV</p>
+                </details>
+                <details>
+                    <summary>Languages</summary>
+                    <p><strong>Fluent:</strong> English · <strong>Intermediate:</strong> German
+                </details>
+            </section>
+
+            <section id="projects">
+                <h2>Projects Portfolio</h2>
+                <p>Portfolio section in progress.</p>
+            </section>
+
+            <section id="honors">
+                <h2>Honors & Awards</h2>
+                <div class="item">
+                    <div class="meta">2024</div>
+                    <strong>Research Summer Award</strong>
+                    <span>Faculty of Information Technology, CTU</span>
+                    <span>Recognized for publishing peer-reviewed research.</span>
+                </div>
+            </section>
+
+            <section id="teaching">
+                <h2>Teaching Experience</h2>
+                <div class="item">
+                    <div class="meta">Sep 2025 – Jun 2026 · Prague</div>
+                    <strong>Teacher of Informatics, ZŠ Hovorčovická 11</strong>
+                    <span>Led 17 classes for students aged 9–15.</span>
+                </div>
+                <div class="item">
+                    <div class="meta">Sep 2022 – Dec 2023 · Prague</div>
+                    <strong>Math Tutor, Populo</strong>
+                    <span>Guided 7 students (ages 12–20) through advanced mathematics topics.</span>
+                </div>
+                <div class="item">
+                    <div class="meta">Dec 2020 – Jun 2021 · České Budějovice</div>
+                    <strong>Math Tutor, Private Tutoring</strong>
+                    <span>Supported four students preparing for exams and competitions.</span>
+                </div>
+                <div class="item">
+                    <div class="meta">Sep 2020 · České Budějovice</div>
+                    <strong>Volunteer Math Tutor</strong>
+                    <span>Created tailored learning plans for a 15-year-old student with autism and ADHD.</span>
+                </div>
+            </section>
+
+            <section id="other-work">
+                <h2>Other Work Experience</h2>
+                <div class="item">
+                    <div class="meta">Mar 2021 – Jun 2021 · České Budějovice</div><strong>Parcel Delivery Driver, Česká
+                        pošta</strong>
+                </div>
+                <div class="item">
+                    <div class="meta">Sep 2020 – Oct 2020 · České Budějovice</div><strong>Fast Food Delivery Driver,
+                        Prorozvoz</strong>
+                </div>
+                <div class="item">
+                    <div class="meta">Jul 2020 – Aug 2021 · Vyšší Brod</div><strong>Boat Rental Driver, Petr
+                        Putzer</strong>
+                </div>
+                <div class="item">
+                    <div class="meta">Aug 2017 – Sep 2017 · Planá</div><strong>Factory Worker, Achilles</strong>
+                </div>
+            </section>
+
+            <section id="volunteering">
+                <h2>Volunteering</h2>
+                <div class="item">
+                    <div class="meta">Feb 2020 · Karlovy Vary</div><strong>Caregiver, Coronavirus Unit, KKN</strong>
+                </div>
+                <div class="item">
+                    <div class="meta">Feb 2020 – Aug 2020 · Týn nad Vltavou</div><strong>Website Consultant, Municipal
+                        Office</strong>
+                </div>
+                <div class="item">
+                    <div class="meta">2018 – 2021 · Prague</div><strong>Minecraft Cup Organiser, Microsoft</strong>
+                </div>
+            </section>
+
+            <section id="hobbies">
+                <h2>Hobbies</h2>
+                <p>Team sports · Traveling · Cuban Salsa · Music</p>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        Last updated November 2025 · Download the PDF version for offline viewing.
+    </footer>
+
+
+    <script>
+        const header = document.querySelector("header");
+        const root = document.documentElement;
+
+        const setHeaderOffset = () => {
+            if (!header) return;
+            root.style.setProperty("--header-height", `${header.offsetHeight}px`);
+        };
+
+        setHeaderOffset();
+        window.addEventListener("resize", setHeaderOffset);
+        window.addEventListener("load", setHeaderOffset);
+
+        // Simple scroll spy for active nav highlighting
+        const navLinks = Array.from(document.querySelectorAll("nav a"));
+
+        navLinks[0]?.classList.add("active");
+
+        navLinks.forEach(link => {
+            link.addEventListener("click", () => {
+                navLinks.forEach(item => item.classList.remove("active"));
+                link.classList.add("active");
+            });
+        });
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                const id = entry.target.getAttribute("id");
+                const link = document.querySelector(`nav a[href="#${id}"]`);
+                if (entry.intersectionRatio > 0.3) {
+                    link?.classList.add("active");
+                } else {
+                    link?.classList.remove("active");
+                }
+            });
+        }, { threshold: [0.3] });
+
+        document.querySelectorAll("main section[id]").forEach(section => observer.observe(section));
+
+        const downloadButton = document.getElementById("download-pdf");
+        const collapsibleSections = Array.from(document.querySelectorAll("details"));
+
+        const beforePrint = () => {
+            collapsibleSections.forEach(section => {
+                section.dataset.wasOpen = section.open ? "true" : "false";
+                if (!section.open) {
+                    section.open = true;
+                }
+            });
+        };
+
+        const afterPrint = () => {
+            collapsibleSections.forEach(section => {
+                if (section.dataset.wasOpen !== "true") {
+                    section.open = false;
+                }
+                delete section.dataset.wasOpen;
+            });
+        };
+
+        if (downloadButton) {
+            downloadButton.addEventListener("click", () => {
+                beforePrint();
+                window.print();
+            });
+        }
+
+        window.addEventListener("beforeprint", beforePrint);
+        window.addEventListener("afterprint", afterPrint);
+
+        const printMediaQuery = window.matchMedia ? window.matchMedia("print") : null;
+        if (printMediaQuery) {
+            const handlePrintChange = event => {
+                if (event.matches) {
+                    beforePrint();
+                } else {
+                    afterPrint();
+                }
+            };
+
+            if (printMediaQuery.addEventListener) {
+                printMediaQuery.addEventListener("change", handlePrintChange);
+            } else if (printMediaQuery.addListener) {
+                printMediaQuery.addListener(handlePrintChange);
+            }
+        }
+    </script>
+</body>
+
+</html>
