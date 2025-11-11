@@ -24,14 +24,19 @@
             padding: 2.5rem clamp(1.5rem, 3vw, 3rem) 1.5rem;
             background: linear-gradient(160deg, #3a7bd5, #00d2ff);
             color: #fff;
-            position: sticky;
-            top: 0;
-            z-index: 10;
             box-shadow: 0 12px 24px rgba(15, 44, 71, .2);
             display: grid;
             grid-template-columns: auto minmax(0, 1fr);
             gap: 2rem;
             align-items: center;
+        }
+
+        @media (min-width: 961px) {
+            header {
+                position: sticky;
+                top: 0;
+                z-index: 10;
+            }
         }
 
         header h1 {
@@ -86,7 +91,7 @@
 
         main {
             display: grid;
-            grid-template-columns: minmax(16rem, 22rem) minmax(0, 1fr);
+            grid-template-columns: max-content minmax(0, 1fr) minmax(16rem, 20rem);
             gap: 2rem;
             padding: 2rem clamp(1.5rem, 2vw, 3rem);
             align-items: start;
@@ -97,17 +102,35 @@
             flex-direction: column;
         }
 
+        .sticky-panel {
+            position: sticky;
+            top: calc(var(--header-height) + 1.5rem);
+            align-self: start;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-height: calc(100vh - (var(--header-height) + 2rem));
+            overflow: auto;
+            padding-right: .25rem;
+            overscroll-behavior: contain;
+        }
+
+        .sticky-panel section {
+            margin-bottom: 0;
+        }
+
         nav {
             background: #fff;
             border-radius: 18px;
             box-shadow: 0 14px 32px rgba(15, 44, 71, .1);
-            padding: 1.5rem;
+            padding: 1rem 1.25rem;
             position: sticky;
             top: calc(var(--header-height) + 1.5rem);
             align-self: start;
             max-height: calc(100vh - 3rem);
             overflow: auto;
             z-index: 5;
+            width: max-content;
         }
 
         nav a {
@@ -116,6 +139,7 @@
             color: inherit;
             font-weight: 600;
             text-decoration: none;
+            white-space: nowrap;
         }
 
         nav a.active {
@@ -127,15 +151,52 @@
         section {
             background: #fff;
             border-radius: 18px;
-            box-shadow: 0 14px 32px rgba(15, 44, 71, .08);
-            padding: 1.75rem;
-            margin-bottom: 1.5rem;
+            box-shadow: 0 18px 42px rgba(15, 44, 71, .1);
+            padding: 2rem;
+            margin-bottom: 2.5rem;
             scroll-margin-top: calc(var(--header-height) + 2rem);
+            position: relative;
+            overflow: visible;
+        }
+
+        section:not(:last-of-type)::after {
+            content: "";
+            position: absolute;
+            left: 2rem;
+            right: 2rem;
+            bottom: -1.5rem;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(58, 123, 213, 0), rgba(58, 123, 213, .35), rgba(58, 123, 213, 0));
+            pointer-events: none;
         }
 
         h2 {
             margin-top: 0;
             font-size: 1.5rem;
+        }
+
+        section.collapsible details {
+            margin: 0;
+        }
+
+        section.collapsible summary {
+            font-size: 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 0;
+        }
+
+        section.collapsible summary:focus {
+            outline: 2px solid rgba(58, 123, 213, .4);
+            border-radius: 10px;
+        }
+
+        section.collapsible details[open] summary {
+            margin-bottom: 1rem;
+        }
+
+        section.collapsible details[open] .collapsible-content {
+            margin-top: .25rem;
         }
 
         .item {
@@ -172,6 +233,23 @@
             border-radius: 999px;
         }
 
+        .activity-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+            font-weight: 600;
+            align-items: center;
+        }
+
+        .activity-list .activity {
+            white-space: nowrap;
+        }
+
+        .activity-list .separator {
+            color: #3a7bd5;
+            font-weight: 700;
+        }
+
         details {
             margin-bottom: 1rem;
         }
@@ -191,81 +269,175 @@
         @media print {
             :root {
                 color-scheme: light;
+                /* ensure header offset doesn't leave extra white space */
+                --header-height: 0px;
             }
 
+            /* Use A4 and tighter margins to help two-page fit */
             @page {
-                margin: 1in;
+                size: A4 portrait;
+                margin: 12mm;
             }
 
             body {
                 background: #fff;
                 color: #000;
-                font-size: 11pt;
+                /* slightly smaller font for tighter layout */
+                font-size: 10pt;
+                line-height: 1.35;
             }
 
+            /* Compact header for print */
             header {
                 background: none;
                 color: #000;
                 position: static;
                 box-shadow: none;
-                grid-template-columns: minmax(0, 1fr) auto;
-                padding: 0 0 1.5rem;
-                gap: 1rem;
+                display: flex;
+                align-items: center;
+                gap: .5rem;
+                padding: 0 0 .6rem;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.08);
             }
 
-            header a {
-                color: inherit !important;
+            header .header-content {
+                max-width: none;
+                padding-right: .5rem;
             }
 
+            header h1 {
+                margin: 0;
+                font-size: 16pt;
+                line-height: 1.05;
+            }
+
+            header .tagline {
+                font-size: 9.5pt;
+                margin: .15rem 0 0;
+            }
+
+            /* Keep profile photo styling consistent with on-screen layout */
             .profile-photo {
-                border: none;
-                box-shadow: none;
-                order: 1;
+                width: clamp(120px, 18vw, 180px);
+                aspect-ratio: 1;
+                border-radius: 20px;
+                object-fit: cover;
+                border: 3px solid rgba(255, 255, 255, .6);
+                box-shadow: 0 12px 24px rgba(12, 34, 56, .25);
+                margin-left: auto;
+                order: 2;
             }
 
+            /* hide interactive parts */
             nav,
             .download-btn,
-            footer {
+            footer,
+            .header-actions {
                 display: none !important;
             }
 
+            /* Single column flow for print */
             main {
                 grid-template-columns: 1fr;
                 padding: 0;
-                gap: 0;
+                gap: .5rem;
             }
 
             .content {
-                gap: 1.25rem;
+                gap: .5rem;
             }
 
+            /* Put the side panel contents inline and remove sticky behaviour */
+            .sticky-panel {
+                position: static;
+                top: auto;
+                margin-top: .5rem;
+                gap: .5rem;
+                max-height: none;
+                overflow: visible;
+                padding-right: 0;
+                overscroll-behavior: auto;
+            }
+
+            /* Sections: minimal padding and margins to save space */
             section {
                 background: none;
                 border-radius: 0;
                 box-shadow: none;
-                padding: 0;
-                margin: 0;
+                padding: .1rem 0;
+                margin: 0 0 .35rem;
+                scroll-margin-top: 0;
                 page-break-inside: avoid;
                 break-inside: avoid;
             }
 
+            /* Items: reduce left border, tighten padding */
             .item {
-                border-left-color: #1c1f26;
-                padding-left: .75rem;
+                margin-bottom: .4rem;
+                border-left: 2px solid #1c1f26;
+                padding-left: .6rem;
+            }
+
+            .meta {
+                font-size: 8.5pt;
+                color: #444;
             }
 
             h2 {
-                margin-bottom: .6rem;
-                font-size: 1.35rem;
+                margin: 0 0 .25rem;
+                font-size: 13.5pt;
+            }
+
+            /* Make chips and small UI elements compact */
+            .chips {
+                gap: .25rem;
+            }
+
+            .chip {
+                font-size: 8.5pt;
+                padding: .15rem .45rem;
             }
 
             details {
-                margin-bottom: .6rem;
+                margin-bottom: .35rem;
+            }
+
+            summary {
+                font-size: 12.5pt;
+                font-weight: 700;
             }
 
             a {
                 color: inherit;
                 text-decoration: none;
+            }
+
+            header a {
+                color: #000 !important;
+                text-decoration: underline !important;
+            }
+
+            /* Slightly reduce spacing between items to save half a page */
+            .item+.item {
+                margin-top: .15rem;
+            }
+
+            /* Prevent long unnecessary whitespace at page breaks */
+            .content,
+            .sticky-panel {
+                widows: 2;
+                orphans: 2;
+            }
+
+            /* Page-specific fine tuning if needed for different sides */
+            @page :left {
+                margin-top: 10mm;
+                margin-bottom: 12mm;
+            }
+
+            @page :right {
+                margin-top: 10mm;
+                margin-bottom: 12mm;
             }
         }
 
@@ -276,6 +448,19 @@
 
             nav {
                 position: static;
+                width: 100%;
+                max-width: none;
+            }
+
+            .sticky-panel {
+                position: static;
+                top: auto;
+                margin-top: 1.5rem;
+                grid-row: auto;
+                max-height: none;
+                overflow: visible;
+                padding-right: 0;
+                overscroll-behavior: auto;
             }
 
             header {
@@ -349,28 +534,14 @@
                 Prague, Czechia
             </p>
             <div class="header-actions">
-                <button type="button" class="download-btn" id="download-pdf">Download PDF</button>
+                <button type="button" class="download-btn" id="download-pdf">Download printable PDF</button>
             </div>
         </div>
         <img class="profile-photo" src="profile.jpeg" alt="Profile picture of Tomáš Novotný" />
     </header>
 
     <main>
-        <nav>
-            <a href="#summary">Summary</a>
-            <a href="#education">Education</a>
-            <a href="#experience">Professional Experience</a>
-            <a href="#freelance">Freelance Experience</a>
-            <a href="#publications">Publications</a>
-            <a href="#self-development">Self-development</a>
-            <a href="#skills">Skills</a>
-            <a href="#projects">Projects Portfolio</a>
-            <a href="#honors">Honors &amp; Awards</a>
-            <a href="#teaching">Teaching Experience</a>
-            <a href="#other-work">Other Work</a>
-            <a href="#volunteering">Volunteering</a>
-            <a href="#hobbies">Hobbies</a>
-        </nav>
+        <nav data-auto-nav></nav>
 
         <div class="content">
             <section id="summary">
@@ -379,30 +550,12 @@
                     software development and AI research.</p>
             </section>
 
-            <section id="education">
-                <h2>Education</h2>
-                <div class="item">
-                    <div class="meta">Jun 2024 – Present · Prague</div>
-                    <strong>Master of Science, Knowledge Engineering</strong>
-                    <span>Czech Technical University, Faculty of Information Technology</span>
-                </div>
-                <div class="item">
-                    <div class="meta">Sep 2021 – Jun 2024 · Prague</div>
-                    <strong>Bachelor of Science, Artificial Intelligence</strong>
-                    <span>Czech Technical University, Faculty of Information Technology</span>
-                </div>
-                <div class="item">
-                    <div class="meta">Sep 2013 – Jun 2021 · České Budějovice</div>
-                    <strong>Gymnázium České Budějovice, Česká 64</strong>
-                </div>
-            </section>
-
             <section id="experience">
                 <h2>Professional Experience</h2>
                 <div class="item">
                     <div class="meta">Jul 2024 – Present · Prague</div>
-                    <strong>Developer, Blindspot Solutions</strong>
-                    <span>Model optimization problems and build web applications in Kotlin for enterprise
+                    <strong>AI Developer, Blindspot Solutions</strong>
+                    <span>Development of optimization tool and web application in Kotlin for manufacturer client.
                         clients.</span>
                 </div>
                 <div class="item">
@@ -428,7 +581,12 @@
                 <h2>Freelance Experience</h2>
                 <div class="item">
                     <div class="meta">2024 – Present · Prague</div>
-                    <strong>AI dětem</strong>
+                    <strong>Machine learning POCs, AI dětem</strong>
+                    <span>Conducting studies to demonstrate machine learning capabilities.</span>
+                </div>
+                <div class="item">
+                    <div class="meta">Jun 2025 – Oct 2025 · Prague</div>
+                    <strong>Web application development, AI dětem</strong>
                     <span>Built a web application to manage questionnaires and data collection pipelines.</span>
                 </div>
                 <div class="item">
@@ -438,9 +596,47 @@
                 </div>
                 <div class="item">
                     <div class="meta">2024 · Prague</div>
-                    <strong>Business Analysis & Solution Proposal, Heli</strong>
+                    <strong>Business Analysis & Solution Proposal, Heli Food Fresh a.s.</strong>
                     <span>Conducted business discovery and recommended data-driven solutions.</span>
                 </div>
+            </section>
+
+            <section id="education">
+                <h2>Education</h2>
+                <div class="item">
+                    <div class="meta">Jun 2024 – Present · Prague</div>
+                    <strong>Master of Science, Knowledge Engineering</strong>
+                    <span>Czech Technical University, Faculty of Information Technology</span>
+                </div>
+                <div class="item">
+                    <div class="meta">Sep 2021 – Jun 2024 · Prague</div>
+                    <strong>Bachelor of Science, Artificial Intelligence</strong>
+                    <span>Czech Technical University, Faculty of Information Technology</span>
+                </div>
+                <!-- <div class="item">
+                    <div class="meta">Sep 2013 – Jun 2021 · České Budějovice</div>
+                    <strong>Gymnázium České Budějovice, Česká 64</strong>
+                </div> -->
+            </section>
+
+            <section id="self-development">
+                <h2>Extra Activities</h2>
+                <div class="activity-list">
+                    <span class="activity">prg.ai Industry Talks</span>
+                    <span class="separator" aria-hidden="true">&bull;</span>
+                    <span class="activity">MSD Meetups</span>
+                    <span class="separator" aria-hidden="true">&bull;</span>
+                    <span class="activity">Synapse 2025 Conference</span>
+                    <span class="separator" aria-hidden="true">&bull;</span>
+                    <span class="activity">PPAM 2024 Conference</span>
+                    <span class="separator" aria-hidden="true">&bull;</span>
+                    <span class="activity">SVOČ 2024 Competition</span>
+                </div>
+            </section>
+
+            <section id="projects">
+                <h2>Projects Portfolio</h2>
+                <p>Portfolio section in progress.</p>
             </section>
 
             <section id="publications">
@@ -450,65 +646,6 @@
                         Movement</strong>
                     <a href="https://doi.org/10.1007/978-3-031-85703-4_23">doi:10.1007/978-3-031-85703-4_23</a>
                 </div>
-            </section>
-
-            <section id="self-development">
-                <h2>Self-development</h2>
-                <div class="item">
-                    <div class="meta">2025 – Present · Prague</div><strong>prg.ai Industry Talks</strong><span>Tech
-                        industry insights</span>
-                </div>
-                <div class="item">
-                    <div class="meta">2025 – Present · Prague</div><strong>MSD Meetups</strong><span>Machine learning
-                        community events</span>
-                </div>
-                <div class="item">
-                    <div class="meta">2025 · Prague</div><strong>Synapse Conference</strong><span>AI & technology
-                        conference</span>
-                </div>
-                <div class="item">
-                    <div class="meta">2024 · Ostrava</div><strong>PPAM 2024 Conference</strong><span>Presented research
-                        paper</span>
-                </div>
-                <div class="item">
-                    <div class="meta">2024 · Czechia</div><strong>SVOČ</strong><span>Czech Student Scientific
-                        Competition</span>
-                </div>
-            </section>
-
-            <section id="skills">
-                <h2>Skills</h2>
-                <details open>
-                    <summary>Field of Study</summary>
-                    <div class="chips">
-                        <span class="chip">Machine Learning</span>
-                        <span class="chip">Knowledge-based Systems</span>
-                        <span class="chip">Agent-based Models</span>
-                        <span class="chip">Data Science</span>
-                        <span class="chip">Optimization</span>
-                        <span class="chip">Machine Vision</span>
-                        <span class="chip">Stochastic Processes and Simulation</span>
-                    </div>
-                </details>
-                <details>
-                    <summary>Programming & Scripting</summary>
-                    <p><strong>Experienced:</strong> C/C++, Python, Kotlin</p>
-                    <p><strong>Familiar:</strong> Julia, R, PostgreSQL, Bash</p>
-                </details>
-                <details>
-                    <summary>Tools & Libraries</summary>
-                    <p>Git (Lab/Hub, Bitbucket), Conda, Docker, Jupyter, Atlassian (Confluence, Jira)</p>
-                    <p><strong>Libraries:</strong> scikit-learn, PyTorch, pandas, Matplotlib, OpenCV</p>
-                </details>
-                <details>
-                    <summary>Languages</summary>
-                    <p><strong>Fluent:</strong> English · <strong>Intermediate:</strong> German
-                </details>
-            </section>
-
-            <section id="projects">
-                <h2>Projects Portfolio</h2>
-                <p>Portfolio section in progress.</p>
             </section>
 
             <section id="honors">
@@ -521,47 +658,57 @@
                 </div>
             </section>
 
-            <section id="teaching">
-                <h2>Teaching Experience</h2>
-                <div class="item">
-                    <div class="meta">Sep 2025 – Jun 2026 · Prague</div>
-                    <strong>Teacher of Informatics, ZŠ Hovorčovická 11</strong>
-                    <span>Led 17 classes for students aged 9–15.</span>
-                </div>
-                <div class="item">
-                    <div class="meta">Sep 2022 – Dec 2023 · Prague</div>
-                    <strong>Math Tutor, Populo</strong>
-                    <span>Guided 7 students (ages 12–20) through advanced mathematics topics.</span>
-                </div>
-                <div class="item">
-                    <div class="meta">Dec 2020 – Jun 2021 · České Budějovice</div>
-                    <strong>Math Tutor, Private Tutoring</strong>
-                    <span>Supported four students preparing for exams and competitions.</span>
-                </div>
-                <div class="item">
-                    <div class="meta">Sep 2020 · České Budějovice</div>
-                    <strong>Volunteer Math Tutor</strong>
-                    <span>Created tailored learning plans for a 15-year-old student with autism and ADHD.</span>
-                </div>
+            <section id="teaching" class="collapsible" data-nav-title="Teaching Experience">
+                <details>
+                    <summary>Teaching Experience</summary>
+                    <div class="collapsible-content">
+                        <div class="item">
+                            <div class="meta">Sep 2025 – Jun 2026 · Prague</div>
+                            <strong>Teacher of Informatics, ZŠ Hovorčovická 11</strong>
+                            <span>Led 17 classes for students aged 9–15.</span>
+                        </div>
+                        <div class="item">
+                            <div class="meta">Sep 2022 – Dec 2023 · Prague</div>
+                            <strong>Math Tutor, Populo</strong>
+                            <span>Guided 7 students (ages 12–20) through advanced mathematics topics.</span>
+                        </div>
+                        <div class="item">
+                            <div class="meta">Dec 2020 – Jun 2021 · České Budějovice</div>
+                            <strong>Math Tutor, Private Tutoring</strong>
+                            <span>Supported four students preparing for exams and competitions.</span>
+                        </div>
+                        <div class="item">
+                            <div class="meta">Sep 2020 · České Budějovice</div>
+                            <strong>Volunteer Math Tutor</strong>
+                            <span>Created tailored learning plans for a 15-year-old student with autism and ADHD.</span>
+                        </div>
+                    </div>
+                </details>
             </section>
 
-            <section id="other-work">
-                <h2>Other Work Experience</h2>
-                <div class="item">
-                    <div class="meta">Mar 2021 – Jun 2021 · České Budějovice</div><strong>Parcel Delivery Driver, Česká
-                        pošta</strong>
-                </div>
-                <div class="item">
-                    <div class="meta">Sep 2020 – Oct 2020 · České Budějovice</div><strong>Fast Food Delivery Driver,
-                        Prorozvoz</strong>
-                </div>
-                <div class="item">
-                    <div class="meta">Jul 2020 – Aug 2021 · Vyšší Brod</div><strong>Boat Rental Driver, Petr
-                        Putzer</strong>
-                </div>
-                <div class="item">
-                    <div class="meta">Aug 2017 – Sep 2017 · Planá</div><strong>Factory Worker, Achilles</strong>
-                </div>
+            <section id="other-work" class="collapsible" data-nav-title="Other Work Experience">
+                <details>
+                    <summary>Other Work Experience</summary>
+                    <div class="collapsible-content">
+                        <div class="item">
+                            <div class="meta">Mar 2021 – Jun 2021 · České Budějovice</div><strong>Parcel Delivery
+                                Driver, Česká
+                                pošta</strong>
+                        </div>
+                        <div class="item">
+                            <div class="meta">Sep 2020 – Oct 2020 · České Budějovice</div><strong>Fast Food Delivery
+                                Driver,
+                                Prorozvoz</strong>
+                        </div>
+                        <div class="item">
+                            <div class="meta">Jul 2020 – Aug 2021 · Vyšší Brod</div><strong>Boat Rental Driver, Petr
+                                Putzer</strong>
+                        </div>
+                        <div class="item">
+                            <div class="meta">Aug 2017 – Sep 2017 · Planá</div><strong>Factory Worker, Achilles</strong>
+                        </div>
+                    </div>
+                </details>
             </section>
 
             <section id="volunteering">
@@ -583,6 +730,37 @@
                 <p>Team sports · Traveling · Cuban Salsa · Music</p>
             </section>
         </div>
+
+        <aside class="sticky-panel">
+            <section id="skills">
+                <h2>Skills</h2>
+                <p>
+                <div class="chips">
+                    <span class="chip">Machine Learning</span>
+                    <span class="chip">Knowledge-based Systems</span>
+                    <span class="chip">Agent-based Models</span>
+                    <span class="chip">Data Science</span>
+                    <span class="chip">Optimization</span>
+                    <span class="chip">Machine Vision</span>
+                    <span class="chip">Stochastic Processes</span>
+                </div>
+                </p>
+                <details open>
+                    <summary>Programming & Scripting</summary>
+                    <p><strong>Experienced:</strong> C/C++, Python, Kotlin</p>
+                    <p><strong>Familiar:</strong> Julia, R, PostgreSQL, Bash</p>
+                </details>
+                <details open>
+                    <summary>Tools & Libraries</summary>
+                    <p>Git (Lab/Hub, Bitbucket), Conda, Docker, Jupyter, Atlassian (Confluence, Jira)</p>
+                    <p><strong>Libraries:</strong> scikit-learn, PyTorch, tensorflow, pandas, Matplotlib, OpenCV</p>
+                </details>
+                <details open>
+                    <summary>Languages</summary>
+                    <p><strong>Fluent:</strong> English · <strong>Intermediate:</strong> German
+                </details>
+            </section>
+        </aside>
     </main>
 
     <script>
@@ -598,8 +776,67 @@
         window.addEventListener("resize", setHeaderOffset);
         window.addEventListener("load", setHeaderOffset);
 
+        const nav = document.querySelector("nav[data-auto-nav]");
+        const allSections = Array.from(document.querySelectorAll("main section[id]"));
+        const content = document.querySelector(".content");
+        const summarySection = document.querySelector("#summary");
+        const skillsContainer = document.querySelector("aside.sticky-panel");
+        const skillsSection = skillsContainer?.querySelector("#skills") || null;
+        const narrowLayoutQuery = window.matchMedia ? window.matchMedia("(max-width: 960px)") : null;
+        let navLinks = [];
+
+        const placeSkillsSection = (isNarrow) => {
+            if (!skillsContainer || !skillsSection || !summarySection || !content) return;
+            if (isNarrow) {
+                if (skillsSection.parentElement !== content) {
+                    summarySection.insertAdjacentElement("afterend", skillsSection);
+                }
+                skillsContainer.style.display = "none";
+            } else {
+                if (skillsSection.parentElement !== skillsContainer) {
+                    skillsContainer.appendChild(skillsSection);
+                }
+                skillsContainer.style.removeProperty("display");
+            }
+        };
+
+        if (narrowLayoutQuery) {
+            placeSkillsSection(narrowLayoutQuery.matches);
+            const handleLayoutChange = (event) => placeSkillsSection(event.matches);
+            if (narrowLayoutQuery.addEventListener) {
+                narrowLayoutQuery.addEventListener("change", handleLayoutChange);
+            } else if (narrowLayoutQuery.addListener) {
+                narrowLayoutQuery.addListener(handleLayoutChange);
+            }
+        } else {
+            placeSkillsSection(window.innerWidth <= 960);
+            window.addEventListener("resize", () => placeSkillsSection(window.innerWidth <= 960));
+        }
+
+        if (nav) {
+            const fragment = document.createDocumentFragment();
+
+            allSections.forEach(section => {
+                const heading = section.querySelector("h1, h2, h3");
+                const label = section.dataset.navTitle?.trim() || heading?.textContent.trim() || section.id;
+                if (!label) {
+                    return;
+                }
+
+                const link = document.createElement("a");
+                link.href = `#${section.id}`;
+                link.textContent = label;
+                fragment.appendChild(link);
+            });
+
+            nav.textContent = "";
+            nav.appendChild(fragment);
+            navLinks = Array.from(nav.querySelectorAll("a"));
+        } else {
+            navLinks = Array.from(document.querySelectorAll("nav a"));
+        }
+
         // Simple scroll spy for active nav highlighting
-        const navLinks = Array.from(document.querySelectorAll("nav a"));
 
         navLinks[0]?.classList.add("active");
 
@@ -622,7 +859,9 @@
             });
         }, { threshold: [0.3] });
 
-        document.querySelectorAll("main section[id]").forEach(section => observer.observe(section));
+        const observedSections = allSections.filter(section => !section.closest(".sticky-panel"));
+
+        observedSections.forEach(section => observer.observe(section));
 
         const downloadButton = document.getElementById("download-pdf");
         const collapsibleSections = Array.from(document.querySelectorAll("details"));
