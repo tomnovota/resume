@@ -1,20 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- před odesláním:
-- co nejstručnější (1-2str A4)
-- odstranit nerelevantní věci
-- přidat do summary relevantní k práci
--->
-
 <head>
     <meta charset="utf-8" />
     <title>Tomáš Novotný · Resume</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
     <style>
         :root {
-            color-scheme: light dark;
+            color-scheme: light;
             font-family: "Inter", system-ui, sans-serif;
             line-height: 1.5;
             --header-height: 0px;
@@ -279,21 +272,18 @@
         @media print {
             :root {
                 color-scheme: light;
-                /* ensure header offset doesn't leave extra white space */
                 --header-height: 0px;
             }
 
-            /* Use A4 and tighter margins to help two-page fit */
             @page {
                 size: A4 portrait;
-                margin: 12mm;
+                margin: 12mm 14mm;
             }
 
             body {
                 background: #fff;
-                color: #000;
-                /* slightly smaller font for tighter layout */
-                font-size: 10pt;
+                color: #1c1f26;
+                font-size: 9.5pt;
                 line-height: 1.35;
             }
 
@@ -303,17 +293,17 @@
                 overflow: hidden;
             }
 
-            /* Compact header for print */
+            /* ── Modern header with accent bar ── */
             header {
                 background: none;
-                color: #000;
+                color: #1c1f26;
                 position: static;
                 box-shadow: none;
                 display: flex;
                 align-items: center;
-                gap: .5rem;
-                padding: 0 0 .6rem;
-                border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+                gap: .6rem;
+                padding: 0 0 .55rem;
+                border-bottom: 3px solid #3a7bd5;
             }
 
             header .header-content {
@@ -323,23 +313,29 @@
 
             header h1 {
                 margin: 0;
-                font-size: 16pt;
+                font-size: 17pt;
                 line-height: 1.05;
+                color: #3a7bd5;
             }
 
             header .tagline {
-                font-size: 9.5pt;
-                margin: .15rem 0 0;
+                font-size: 9pt;
+                margin: .2rem 0 0;
+                color: #444;
             }
 
-            /* Keep profile photo styling consistent with on-screen layout */
+            header p {
+                font-size: 8.5pt;
+                color: #586174;
+            }
+
             .profile-photo {
-                width: clamp(120px, 18vw, 180px);
+                width: 90px;
                 aspect-ratio: 1;
-                border-radius: 20px;
+                border-radius: 14px;
                 object-fit: cover;
-                border: 3px solid rgba(255, 255, 255, .6);
-                box-shadow: 0 12px 24px rgba(12, 34, 56, .25);
+                border: 2px solid #3a7bd5;
+                box-shadow: none;
                 margin-left: auto;
                 order: 2;
             }
@@ -352,100 +348,148 @@
                 display: none !important;
             }
 
+            /* Hide less-relevant sections in print/PDF export */
+            section#volunteering,
+            section#teaching,
+            section#other-work,
+            section#hobbies {
+                display: none !important;
+            }
+
             /* Single column flow for print */
             main {
                 grid-template-columns: 1fr;
                 padding: 0;
-                gap: .5rem;
+                gap: .4rem;
             }
 
             .content {
-                gap: .5rem;
+                gap: .4rem;
             }
 
-            /* Put the side panel contents inline and remove sticky behaviour */
             .sticky-panel {
                 position: static;
                 top: auto;
-                margin-top: .5rem;
-                gap: .5rem;
+                margin-top: .4rem;
+                gap: .4rem;
                 max-height: none;
                 overflow: visible;
                 padding-right: 0;
                 overscroll-behavior: auto;
             }
 
-            /* Sections: minimal padding and margins to save space */
+            /* ── Sections with subtle accent ── */
             section {
                 background: none;
                 border-radius: 0;
                 box-shadow: none;
                 padding: .1rem 0;
-                margin: 0 0 .35rem;
+                margin: 0 0 .2rem;
                 scroll-margin-top: 0;
                 page-break-inside: avoid;
                 break-inside: avoid;
             }
 
-            /* Items: reduce left border, tighten padding */
+            section::after {
+                display: none !important;
+            }
+
+            /* ── Section headings with colour and underline ── */
+            h2 {
+                margin: 0 0 .25rem;
+                font-size: 12pt;
+                color: #3a7bd5;
+                border-bottom: 1.5px solid rgba(58, 123, 213, .25);
+                padding-bottom: .15rem;
+            }
+
+            h3 {
+                margin: .35rem 0 .15rem;
+                font-size: 9.5pt;
+                color: #3a7bd5;
+            }
+
+            /* ── Items with blue accent border ── */
             .item {
-                margin-bottom: .4rem;
-                border-left: 2px solid #1c1f26;
+                margin-bottom: .3rem;
+                border-left: 2.5px solid #3a7bd5;
                 padding-left: .6rem;
+                gap: .1rem;
+            }
+
+            .item strong {
+                color: #1c1f26;
             }
 
             .meta {
-                font-size: 8.5pt;
-                color: #444;
+                font-size: 8pt;
+                color: #586174;
+                letter-spacing: .03em;
             }
 
-            h2 {
-                margin: 0 0 .25rem;
-                font-size: 13.5pt;
-            }
-
-            /* Make chips and small UI elements compact */
+            /* ── Chips with subtle fill ── */
             .chips {
-                gap: .25rem;
+                gap: .2rem;
             }
 
             .chip {
-                font-size: 8.5pt;
-                padding: .15rem .45rem;
+                font-size: 7.5pt;
+                padding: .12rem .4rem;
+                background: rgba(58, 123, 213, .08);
+                color: #295694;
+                border: .5px solid rgba(58, 123, 213, .2);
+                border-radius: 999px;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
             }
 
             details {
-                margin-bottom: .35rem;
+                margin-bottom: .3rem;
             }
 
             summary {
-                font-size: 12.5pt;
+                font-size: 11pt;
                 font-weight: 700;
+                color: #3a7bd5;
             }
 
+            /* ── Links: blue and underlined ── */
             a {
-                color: inherit;
+                color: #295694;
                 text-decoration: none;
             }
 
+            section a[href^="http"],
+            section a[href^="https"] {
+                text-decoration: underline;
+                text-decoration-color: rgba(58, 123, 213, .4);
+                text-underline-offset: 2px;
+                color: #295694;
+            }
+
             header a {
-                color: #000 !important;
+                color: #3a7bd5 !important;
                 text-decoration: underline !important;
+                text-decoration-color: rgba(58, 123, 213, .4) !important;
             }
 
-            /* Slightly reduce spacing between items to save half a page */
             .item+.item {
-                margin-top: .15rem;
+                margin-top: .1rem;
             }
 
-            /* Prevent long unnecessary whitespace at page breaks */
+            /* ── Activity list print styling ── */
+            .activity-list .separator {
+                color: #3a7bd5;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
             .content,
             .sticky-panel {
                 widows: 2;
                 orphans: 2;
             }
 
-            /* Page-specific fine tuning if needed for different sides */
             @page :left {
                 margin-top: 10mm;
                 margin-bottom: 12mm;
@@ -540,12 +584,17 @@
         <header>
             <div class="header-content">
                 <h1>Tomáš Novotný</h1>
-                <p class="tagline">Highly organized, hard-working and communicative engineer with a strong mathematical
-                    foundation and with hands-on experience in optimization, applied AI, and software development.</p>
+                <p class="tagline">AI/ML Engineer with 3+ years of hands-on experience in optimization, computer vision,
+                    and applied machine learning.
+                    Published researcher (Springer) with expertise spanning
+                    recommender systems, scheduling, and deep learning.
+                    Pursuing a Master's in Knowledge Engineering
+                    at CTU Prague.
+                    Strong communicator shaped by teaching and client-facing work.</p>
                 <p>
                     <a href="mailto:tomnovota@seznam.cz" style="color:#fff;">tomnovota@seznam.cz</a> ·
                     <a href="tel:+420792342131" style="color:#fff;">(+420) 792 342 131</a> ·
-                    <a href="https://www.linkedin.com/in/tomnovota/" style="color:#fff;">LinkedIn</a> ·
+                    <!-- <a href="https://www.linkedin.com/in/tomnovota/" style="color:#fff;">LinkedIn</a> · -->
                     <a href="https://github.com/tomnovota" style="color:#fff;">GitHub</a> ·
                     Prague, Czechia
                 </p>
@@ -561,215 +610,282 @@
 
             <div class="content">
                 <section id="experience">
-                <h2>Professional Experience</h2>
-                <div class="item">
-                    <div class="meta">Jul 2024 – Jun 2025 · Prague</div>
-                    <strong>AI Developer, Blindspot Solutions</strong>
-                    <span>Development of optimization tool and web application in Kotlin for manufacturer client.</span>
-                </div>
-                <div class="item">
-                    <div class="meta">Oct 2022 – Jun 2023 · České Budějovice</div>
-                    <strong>AI Intern, Bosch</strong>
-                    <span>Enhanced computer and machine vision tooling; improved transfer learning scripts and delivered
-                        a Python-based GUI.</span>
-                </div>
-                <div class="item">
-                    <div class="meta">Dec 2021 – Sep 2022 · Prague</div>
-                    <strong>IT Technician, SP-IT Limited</strong>
-                    <span>Diagnosed hardware/software issues, performed repairs, prophylaxis, and network
-                        maintenance.</span>
-                </div>
-                <div class="item">
-                    <div class="meta">Apr 2018 – Feb 2021 · České Budějovice</div>
-                    <strong>Technical Support Operator, Starnet</strong>
-                    <span>Resolved customer connectivity problems and coordinated service escalations.</span>
-                </div>
-                </section>
-
-                <section id="freelance">
-                <h2>Freelance Experience</h2>
-                <div class="item">
-                    <div class="meta">2024 – Present · Prague</div>
-                    <strong>Machine learning POCs, AI dětem</strong>
-                    <span>Conducting studies to demonstrate machine learning capabilities.</span>
-                </div>
-                <div class="item">
-                    <div class="meta">Jun 2025 – Oct 2025 · Prague</div>
-                    <strong>Web application development, AI dětem</strong>
-                    <span>Built a web application to manage questionnaires and data collection pipelines.</span>
-                </div>
-                <div class="item">
-                    <div class="meta">Jun 2025 · Prague</div>
-                    <strong>AI Training for Employees, ECOM s.r.o.</strong>
-                    <span>Designed and delivered practical AI upskilling workshops.</span>
-                </div>
-                <div class="item">
-                    <div class="meta">2024 · Prague</div>
-                    <strong>Business Analysis & Solution Proposal, Heli Food Fresh a.s.</strong>
-                    <span>Conducted business discovery and recommended data-driven solutions.</span>
-                </div>
+                    <h2>Professional Experience</h2>
+                    <div class="item">
+                        <div class="meta"> Oct 2024 – Dec 2025 · Prague</div>
+                        <strong>Machine learning POCs, AI dětem</strong>
+                        <span>Conducted several studies to demonstrate machine learning capabilities.</span>
+                    </div>
+                    <div class="item">
+                        <div class="meta">Jun 2025 – Oct 2025 · Prague</div>
+                        <strong>Web application development, AI dětem</strong>
+                        <span>Built a web application to manage questionnaires and data collection pipelines.</span>
+                    </div>
+                    <div class="item">
+                        <div class="meta">Jun 2025 · Prague</div>
+                        <strong>AI Training for Employees, ECOM s.r.o.</strong>
+                        <span>Designed and delivered practical AI upskilling workshops.</span>
+                    </div>
+                    <div class="item">
+                        <div class="meta">Apr 2025 - Jun 2025 · Prague</div>
+                        <strong>Business Analysis & Solution Proposal, Heli Food Fresh a.s.</strong>
+                        <span>Conducted technical analysis and recommended data-driven solutions.</span>
+                    </div>
+                    <div class="item">
+                        <div class="meta">Jul 2024 – Jun 2025 · Prague</div>
+                        <strong>AI Developer, Blindspot Solutions</strong>
+                        <span>Development of optimization tool and application in Kotlin for manufacturer
+                            client; deployed on AWS.</span>
+                    </div>
+                    <div class="item">
+                        <div class="meta">Oct 2022 – Jun 2023 · České Budějovice</div>
+                        <strong>AI Intern, Bosch</strong>
+                        <span>Enhanced machine vision tooling; improved transfer learning scripts and
+                            delivered
+                            a Python-based GUI.</span>
+                    </div>
                 </section>
 
                 <section id="education">
-                <h2>Education</h2>
-                <div class="item">
-                    <div class="meta">Jun 2024 – Present · Prague</div>
-                    <strong>Master of Science, Knowledge Engineering</strong>
-                    <span>Czech Technical University, Faculty of Information Technology</span>
-                </div>
-                <div class="item">
-                    <div class="meta">Sep 2021 – Jun 2024 · Prague</div>
-                    <strong>Bachelor of Science, Artificial Intelligence</strong>
-                    <span>Czech Technical University, Faculty of Information Technology</span>
-                </div>
-                <!-- <div class="item">
-                    <div class="meta">Sep 2013 – Jun 2021 · České Budějovice</div>
-                    <strong>Gymnázium České Budějovice, Česká 64</strong>
-                </div> -->
+                    <h2>Education</h2>
+                    <div class="item">
+                        <div class="meta">Jun 2024 – <del>Jun 2027</del> · Prague</div>
+                        <strong>Master of Science, Knowledge Engineering</strong>
+                        <span>Czech Technical University, Faculty of Information Technology</span>
+                    </div>
+                    <div class="item">
+                        <div class="meta">Sep 2021 – Jun 2024 · Prague</div>
+                        <strong>Bachelor of Science, Artificial Intelligence</strong>
+                        <span>Czech Technical University, Faculty of Information Technology</span>
+                    </div>
+
+                    <h3 style="margin: 1.25rem 0 .5rem; font-size: 1.1rem; color: #3a7bd5;">Notable Extra Coursework
+                    </h3>
+                    <div class="chips">
+                        <a class="chip" href="https://ufal.mff.cuni.cz/courses/npfl138/2526-summer"
+                            style="text-decoration:none;">Deep Learning <span
+                                style="opacity:.6;font-weight:400;">(Charles University)</span></a>
+                        <a class="chip" href="https://bilakniha.cvut.cz/en/predmet7580806.html"
+                            style="text-decoration:none;">Personalized Machine Learning</a>
+                        <a class="chip" href="https://bilakniha.cvut.cz/en/predmet7600706.html"
+                            style="text-decoration:none;">Machine Learning in Practice</a>
+                        <a class="chip" href="https://bilakniha.cvut.cz/en/predmet6703906.html"
+                            style="text-decoration:none;">Machine Vision &amp; Image Processing</a>
+                        <a class="chip" href="https://cw.fel.cvut.cz/wiki/courses/uir/lectures/start"
+                            style="text-decoration:none;">Introduction to AI in Robotics <span
+                                style="opacity:.6;font-weight:400;">(CTU FEL)</span></a>
+                        <a class="chip" href="https://courses.fit.cvut.cz/BI-ORL/index.html"
+                            style="text-decoration:none;">Operations Research</a>
+                    </div>
+                </section>
+
+                <section id="projects">
+                    <h2>Projects Portfolio</h2>
+                    <p style="margin-top:0;">Selected academic projects — full collection on
+                        <a href="https://github.com/tomnovota/resume/tree/main/portfolio">GitHub</a>.
+                    </p>
+                    <div class="item">
+                        <strong><a
+                                href="https://github.com/tomnovota/resume/blob/main/portfolio/machine%20learning%20projects/pml%20-%20paper.pdf">Sparse
+                                Embedding Compression for Recommender Systems</a></strong>
+                        <span>Empirical evaluation of sparsification operators (TopK, Gated TopK) within the CompresSAE
+                            framework for compressing high-dimensional embedding tables.</span>
+                    </div>
+                    <div class="item">
+                        <strong><a
+                                href="https://github.com/tomnovota/resume/blob/main/portfolio/machine%20learning%20projects/mvi%20-%20paper.pdf">Age-Appropriateness
+                                Classification of Czech Texts</a></strong>
+                        <span>Fine-tuning a Czech RoBERTa model to classify texts as age-appropriate for children, using
+                            data from the Czech National Corpus.</span>
+                    </div>
+                    <div class="item">
+                        <strong><a
+                                href="https://github.com/tomnovota/resume/blob/main/portfolio/machine%20learning%20projects/mlp%20-%20project.html">Predicting
+                                Population Changes in Czech Municipalities</a></strong>
+                        <span>End-to-end ML project following CRISP-DM: forecasting demographic trends from 50 years of
+                            historical data.</span>
+                    </div>
+                    <div class="item">
+                        <strong><a
+                                href="https://github.com/tomnovota/resume/blob/main/portfolio/optimization%20projects/kop%20-%20project.pdf">Advanced
+                                Heuristics for Weighted MAX-SAT</a></strong>
+                        <span>Simulated-annealing variant with adaptive mechanisms for solving weighted Boolean
+                            satisfiability.</span>
+                    </div>
+                    <div class="item">
+                        <strong><a
+                                href="https://github.com/tomnovota/resume/blob/main/portfolio/machine%20vision%20homeworks/svz04.ipynb">Thermal
+                                &amp; RGB Camera Measurement Pipeline</a></strong>
+                        <span>Computer vision pipeline combining thermal and RGB data for projective transforms,
+                            segmentation, and real-unit measurement.</span>
+                    </div>
+                </section>
+
+                <section id="publications">
+                    <h2>Publications</h2>
+                    <div class="item">
+                        <strong>Kernel Estimates of Pedestrian Density Applied in Simulation of Recreational Pedestrian
+                            Movement</strong>
+                        <a href="https://doi.org/10.1007/978-3-031-85703-4_23">doi:10.1007/978-3-031-85703-4_23</a>
+                    </div>
+                    <div class="item">
+                        <strong>Current Research Topic</strong>
+                        Introduction of a novel method for recommender systems
+                    </div>
                 </section>
 
                 <section id="self-development">
-                <h2>Extra Activities</h2>
-                <div class="activity-list">
-                    <span class="activity">prg.ai Industry Talks</span>
-                    <span class="separator" aria-hidden="true">&bull;</span>
-                    <span class="activity">MSD Meetups</span>
-                    <span class="separator" aria-hidden="true">&bull;</span>
-                    <span class="activity">Synapse 2025 Conference</span>
-                    <span class="separator" aria-hidden="true">&bull;</span>
-                    <span class="activity">PPAM 2024 Conference</span>
-                    <span class="separator" aria-hidden="true">&bull;</span>
-                    <span class="activity">SVOČ 2024 Competition</span>
-                </div>
-                </section>
-
-            <!-- <section id="projects">
-                <h2>Projects Portfolio</h2>
-                <p>Portfolio section in progress.</p>
-            </section>
- -->
-                <section id="publications">
-                <h2>Publications</h2>
-                <div class="item">
-                    <strong>Kernel Estimates of Pedestrian Density Applied in Simulation of Recreational Pedestrian
-                        Movement</strong>
-                    <a href="https://doi.org/10.1007/978-3-031-85703-4_23">doi:10.1007/978-3-031-85703-4_23</a>
-                </div>
+                    <h2>Self-Development</h2>
+                    <div class="activity-list">
+                        <span class="activity">prg.ai Minor</span>
+                        <span class="separator" aria-hidden="true">&bull;</span>
+                        <span class="activity">MSD Meetups</span>
+                        <span class="separator" aria-hidden="true">&bull;</span>
+                        <span class="activity">Synapse 2025 Conference</span>
+                        <span class="separator" aria-hidden="true">&bull;</span>
+                        <span class="activity">PPAM 2024 Conference</span>
+                        <span class="separator" aria-hidden="true">&bull;</span>
+                        <span class="activity">SVOČ 2024 Competition</span>
+                    </div>
                 </section>
 
                 <section id="honors">
-                <h2>Honors & Awards</h2>
-                <div class="item">
-                    <div class="meta">2024</div>
-                    <strong>Research Summer Award</strong>
-                    <span>Faculty of Information Technology, CTU</span>
-                    <span>Recognized for publishing peer-reviewed research.</span>
-                </div>
-                </section>
-
-                <section id="volunteering">
-                <h2>Volunteering</h2>
-                <div class="item">
-                    <div class="meta">Feb 2020 · Karlovy Vary</div><strong>Caregiver, Coronavirus Unit, KKN</strong>
-                </div>
-                <div class="item">
-                    <div class="meta">Feb 2020 – Aug 2020 · Týn nad Vltavou</div><strong>Website Consultant, Municipal
-                        Office</strong>
-                </div>
-                <div class="item">
-                    <div class="meta">2018 – 2021 · Prague</div><strong>Minecraft Cup Organiser, Microsoft</strong>
-                </div>
+                    <h2>Honors & Awards</h2>
+                    <div class="item">
+                        <div class="meta">2024</div>
+                        <strong>Research Summer Award</strong>
+                        <span>Faculty of Information Technology, CTU</span>
+                        <span>Recognized for publishing peer-reviewed research.</span>
+                    </div>
                 </section>
 
                 <section id="hobbies">
-                <h2>Hobbies</h2>
-                <p>Team sports · Traveling · Cuban Salsa · Music</p>
-                </section>
-
-
-                <section id="teaching" class="collapsible" data-nav-title="Teaching Experience">
-                <details>
-                    <summary>Teaching Experience</summary>
-                    <div class="collapsible-content">
-                        <div class="item">
-                            <div class="meta">Sep 2025 – Jun 2026 · Prague</div>
-                            <strong>Teacher of Informatics, ZŠ Hovorčovická 11</strong>
-                            <span>Led 17 classes for students aged 9–15.</span>
-                        </div>
-                        <div class="item">
-                            <div class="meta">Sep 2022 – Dec 2023 · Prague</div>
-                            <strong>Math Tutor, Populo</strong>
-                            <span>Guided 7 students (ages 12–20) through mathematics topics.</span>
-                        </div>
-                        <div class="item">
-                            <div class="meta">Dec 2020 – Jun 2021 · České Budějovice</div>
-                            <strong>Math Tutor, Private Tutoring</strong>
-                            <span>Supported 4 students preparing for exams and competitions.</span>
-                        </div>
-                        <div class="item">
-                            <div class="meta">Sep 2020 · České Budějovice</div>
-                            <strong>Volunteer Math Tutor</strong>
-                            <span>Created tailored learning plans for a 15-year-old student with autism and ADHD.</span>
-                        </div>
-                    </div>
-                </details>
+                    <h2>Hobbies</h2>
+                    <p>Team sports · Traveling · Cuban Salsa · Piano</p>
                 </section>
 
                 <section id="other-work" class="collapsible" data-nav-title="Other Work Experience">
-                <details>
-                    <summary>Other Work Experience</summary>
-                    <div class="collapsible-content">
-                        <div class="item">
-                            <div class="meta">Mar 2021 – Jun 2021 · České Budějovice</div><strong>Parcel Delivery
-                                Driver, Česká
-                                pošta</strong>
+                    <details>
+                        <summary>Other Work Experience</summary>
+                        <div class="collapsible-content">
+                            <div class="item">
+                                <div class="meta">Dec 2021 – Sep 2022 · Prague</div>
+                                <strong>IT Technician, SP-IT Limited</strong>
+                                <span>Diagnosed hardware/software issues, performed repairs, prophylaxis, and network
+                                    maintenance.</span>
+                            </div>
+                            <div class="item">
+                                <div class="meta">Apr 2018 – Feb 2021 · České Budějovice</div>
+                                <strong>Technical Support Operator, Starnet</strong>
+                                <span>Resolved customer connectivity problems and coordinated service
+                                    escalations.</span>
+                            </div>
+                            <div class="item">
+                                <div class="meta">Mar 2021 – Jun 2021 · České Budějovice</div><strong>Parcel Delivery
+                                    Driver, Česká
+                                    pošta</strong>
+                            </div>
+                            <div class="item">
+                                <div class="meta">Sep 2020 – Oct 2020 · České Budějovice</div><strong>Fast Food Delivery
+                                    Driver,
+                                    Prorozvoz</strong>
+                            </div>
+                            <div class="item">
+                                <div class="meta">Jul 2020 – Aug 2021 · Vyšší Brod</div><strong>Boat Rental Driver, Petr
+                                    Putzer</strong>
+                            </div>
+                            <div class="item">
+                                <div class="meta">Aug 2017 – Sep 2017 · Planá</div><strong>Factory Worker,
+                                    Achilles</strong>
+                            </div>
                         </div>
-                        <div class="item">
-                            <div class="meta">Sep 2020 – Oct 2020 · České Budějovice</div><strong>Fast Food Delivery
-                                Driver,
-                                Prorozvoz</strong>
-                        </div>
-                        <div class="item">
-                            <div class="meta">Jul 2020 – Aug 2021 · Vyšší Brod</div><strong>Boat Rental Driver, Petr
-                                Putzer</strong>
-                        </div>
-                        <div class="item">
-                            <div class="meta">Aug 2017 – Sep 2017 · Planá</div><strong>Factory Worker, Achilles</strong>
-                        </div>
-                    </div>
-                </details>
+                    </details>
                 </section>
+
+                <section id="teaching" class="collapsible" data-nav-title="Teaching Experience">
+                    <details>
+                        <summary>Teaching Experience</summary>
+                        <div class="collapsible-content">
+                            <div class="item">
+                                <div class="meta">Sep 2025 – Jun 2026 · Prague</div>
+                                <strong>Teacher of Informatics, ZŠ Hovorčovická 11</strong>
+                                <span>Led 17 classes for students aged 9–15.</span>
+                            </div>
+                            <div class="item">
+                                <div class="meta">Sep 2022 – Dec 2023 · Prague</div>
+                                <strong>Math Tutor, Populo</strong>
+                                <span>Guided 7 students (ages 12–20) through mathematics topics.</span>
+                            </div>
+                            <div class="item">
+                                <div class="meta">Dec 2020 – Jun 2021 · České Budějovice</div>
+                                <strong>Math Tutor, Private Tutoring</strong>
+                                <span>Supported 4 students preparing for exams and competitions.</span>
+                            </div>
+                            <div class="item">
+                                <div class="meta">Sep 2020 · České Budějovice</div>
+                                <strong>Volunteer Math Tutor</strong>
+                                <span>Created tailored learning plans for a 15-year-old student with autism and
+                                    ADHD.</span>
+                            </div>
+                        </div>
+                    </details>
+                </section>
+
+                <section id="volunteering" class="collapsible" data-nav-title="Volunteering">
+                    <details>
+                        <summary>Volunteering</summary>
+                        <div class="collapsible-content">
+                            <div class="item">
+                                <div class="meta">Feb 2020 · Karlovy Vary</div><strong>Caregiver, Coronavirus Unit,
+                                    KKN</strong>
+                            </div>
+                            <div class="item">
+                                <div class="meta">Feb 2020 – Aug 2020 · Týn nad Vltavou</div><strong>Website Consultant,
+                                    Municipal
+                                    Office</strong>
+                            </div>
+                            <div class="item">
+                                <div class="meta">2018 – 2021 · Prague</div><strong>Minecraft Cup Organiser,
+                                    Microsoft</strong>
+                            </div>
+                        </div>
+                    </details>
+                </section>
+
+
 
             </div>
 
             <aside class="sticky-panel">
                 <section id="skills">
                     <h2>Skills</h2>
-                    <p>
                     <div class="chips">
                         <span class="chip">Machine Learning</span>
                         <span class="chip">Data Science</span>
+                        <span class="chip">Recommender Systems</span>
                         <span class="chip">Optimization</span>
+                        <span class="chip">Scheduling</span>
                         <span class="chip">Machine Vision</span>
-                        <span class="chip">App Development</span>
-                        <span class="chip">Knowledge-based Systems</span>
+                        <span class="chip">Robotics</span>
+                        <span class="chip">Reporting</span>
+                        <span class="chip">Natural Language Processing</span>
+                        <span class="chip">Web App Development</span>
                         <span class="chip">Agent-based Models</span>
                         <span class="chip">Stochastic Processes</span>
                     </div>
-                    </p>
-                    <details open>
+                    <details open style="margin-top: 1.25rem;">
                         <summary>Programming & Scripting</summary>
-                        <p><strong>Experienced:</strong> C/C++, Python, Kotlin</p>
-                        <p><strong>Familiar:</strong> Julia, R, PostgreSQL, Bash</p>
+                        <p><strong>Experienced:</strong> C/C++, Python, Bash</p>
+                        <p><strong>Familiar:</strong> Julia, R, PostgreSQL, Kotlin</p>
                     </details>
                     <details open>
                         <summary>Tools & Libraries</summary>
                         <p>Git (Lab/Hub, Bitbucket), Conda, Docker, Jupyter, Atlassian (Confluence, Jira)</p>
-                        <p><strong>Libraries:</strong> scikit-learn, PyTorch, tensorflow, pandas, Matplotlib, OpenCV</p>
+                        <p><strong>Libraries:</strong> mlflow, scikit-learn, pytorch, pandas, matplotlib, opencv</p>
                     </details>
                     <details open>
                         <summary>Languages</summary>
-                        <p><strong>Fluent:</strong> English · <strong>Intermediate:</strong> German
+                        <p><strong>Fluent:</strong> English · <strong>Intermediate:</strong> German</p>
                     </details>
                 </section>
             </aside>
@@ -875,7 +991,7 @@
         observedSections.forEach(section => observer.observe(section));
 
         const downloadButton = document.getElementById("download-pdf");
-        const collapsibleSections = Array.from(document.querySelectorAll("details"));
+        const collapsibleSections = Array.from(document.querySelectorAll("section.collapsible details"));
 
         const beforePrint = () => {
             placeSkillsSection(true);
