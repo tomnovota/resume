@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>REPORT.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="predicting-population-changes-in-czech-municipalities">Predicting Population Changes in Czech Municipalities</h1>
+<!---
+Machine Learning Project Report
+Knowledge report for coworker.
+Consider using Quarto.
+-->
+<p><strong>Author:</strong> Tomáš Novotný</p>
+<p><strong>Date:</strong> December 31, 2025</p>
+<h2 id="introduction">Introduction</h2>
+<p>This report presents a machine learning project aimed at predicting the annual population change rate for municipalities in the Czech Republic. The goal is to leverage historical demographic data to forecast future population trends, which is crucial for local administration planning and resource allocation. The project follows the CRISP-DM methodology, covering data understanding, preparation, modeling, and evaluation. The primary objective is to predict the next-year total population change rate based on historical data from 1971 to 2020.</p>
+<h3 id="problem-definition">Problem Definition</h3>
+<p>The core challenge is to predict the <strong>next-year population change rate</strong> for each municipality, which makes it time-series problem. This target variable normalizes the population change by the municipality's size, allowing for a unified model across the whole country. The project hypothesizes that historical demographic trends (births, deaths, migration) and spatial relationships (region, location) contain sufficient signal to forecast future changes better than a simple baseline.</p>
+<h2 id="data">Data</h2>
+<p>The dataset for this project was sourced from the NI-MLP university course materials. It provides a historical record of demographic changes in the Czech Republic at the municipality level.</p>
+<p>The dataset spans the period from <strong>1971 to 2020</strong> and is structured into two main components:</p>
+<ol>
+<li><strong>Municipality Population Data:</strong> A collection of 77 files (organized by county) containing annual population counts and flow statistics (births, deaths, migration) for every municipality.</li>
+<li><strong>GPS Coordinates:</strong> A supplementary dataset providing spatial coordinates (latitude, longitude) for mapping and spatial analysis.</li>
+</ol>
+<p>The population data includes a secondary sheet named <code>OD_KAM</code>, which details multiple territorial changes in a single year. While this sheet may be valuable for verifying data integrity during the exploration phase, it was not directly used for modeling (due to low quality). However, the aggregate effects of these territorial changes are already captured in the main population data sheets.</p>
+<h3 id="file-structure">File Structure</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">File Type</th>
+<th style="text-align:left">Count</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Municipality Data</td>
+<td style="text-align:left">77</td>
+<td style="text-align:left">One file for each county</td>
+<td style="text-align:left">1. Population Data Sheet<br>2. Multiple Boundary Changes Sheet</td>
+</tr>
+<tr>
+<td style="text-align:left">GPS Data</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">GPS coordinates of municipalities</td>
+<td style="text-align:left">List of municipalities with coordinates</td>
+</tr>
+</tbody>
+</table>
+<h3 id="population-data-columns">Population Data Columns</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Column Name</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Standardized Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><em>Rok</em></td>
+<td style="text-align:left">Year</td>
+<td style="text-align:left">year</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>Číslo obce</em></td>
+<td style="text-align:left">Municipality code</td>
+<td style="text-align:left">municipality_code</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>Název obce</em></td>
+<td style="text-align:left">Municipality name</td>
+<td style="text-align:left">municipality_name</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>Vznik</em></td>
+<td style="text-align:left">Population at the moment of establishment (or re-establishment)</td>
+<td style="text-align:left">population_at_establishment</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>Stav 1. 1.</em></td>
+<td style="text-align:left">Population at the start of the year</td>
+<td style="text-align:left">population_at_start_of_year</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>Narození</em></td>
+<td style="text-align:left">Number of births during the year</td>
+<td style="text-align:left">number_of_births</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>Zemřelí</em></td>
+<td style="text-align:left">Number of deaths during the year</td>
+<td style="text-align:left">number_of_deaths</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>Přistěhovalí</em></td>
+<td style="text-align:left">Number of immigrants during the year</td>
+<td style="text-align:left">number_of_immigrants</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>Vystěhovalí</em></td>
+<td style="text-align:left">Number of emigrants during the year</td>
+<td style="text-align:left">number_of_emigrants</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>Přírůstek přirozený</em></td>
+<td style="text-align:left">Natural population change (births - deaths)</td>
+<td style="text-align:left">natural_population_change</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>Přírůstek migrační</em></td>
+<td style="text-align:left">Migration population change (immigrants - emigrants)</td>
+<td style="text-align:left">migration_population_change</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>Přírůstek celkový</em></td>
+<td style="text-align:left">Total population change (natural + migration)</td>
+<td style="text-align:left">total_population_change</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>Územní změna 1</em></td>
+<td style="text-align:left">Population loss due to municipality division</td>
+<td style="text-align:left">population_loss_due_to_municipality_dividing</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>Stav 31. 12.</em></td>
+<td style="text-align:left">Population at the end of the year</td>
+<td style="text-align:left">population_at_end_of_year</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>Územní změna 2</em></td>
+<td style="text-align:left">Population gain due to municipality joining, establishment, or independence</td>
+<td style="text-align:left">population_gain_due_to_municipality_joining_establishing</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>Odkud</em></td>
+<td style="text-align:left">Municipality code providing population gain</td>
+<td style="text-align:left">municipality_code_giving_population_gain</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>Odkud (název obce)</em></td>
+<td style="text-align:left">Name of the municipality providing population gain</td>
+<td style="text-align:left">municipality_name_giving_population_gain</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>Kam</em></td>
+<td style="text-align:left">Municipality code causing population loss</td>
+<td style="text-align:left">municipality_code_causing_population_loss</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>Kam (název obce)</em></td>
+<td style="text-align:left">Name of the municipality causing population loss</td>
+<td style="text-align:left">municipality_name_causing_population_loss</td>
+</tr>
+</tbody>
+</table>
+<h3 id="multiple-boundary-changes-columns-odkam">Multiple Boundary Changes Columns (OD_KAM)</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Column Name</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Standardized Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><em>Rok</em></td>
+<td style="text-align:left">Year</td>
+<td style="text-align:left">year</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>Číslo obce</em></td>
+<td style="text-align:left">Municipality code</td>
+<td style="text-align:left">municipality_code</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>Název obce</em></td>
+<td style="text-align:left">Municipality name</td>
+<td style="text-align:left">municipality_name</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>Vznik</em></td>
+<td style="text-align:left">Population at establishment</td>
+<td style="text-align:left">population_at_establishment</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>Územní změna 1</em></td>
+<td style="text-align:left">Population loss due to division</td>
+<td style="text-align:left">population_loss_due_to_municipality_dividing</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>Územní změna 2</em></td>
+<td style="text-align:left">Population gain due to joining</td>
+<td style="text-align:left">population_gain_due_to_municipality_joining_establishing</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>OD/KAM</em></td>
+<td style="text-align:left">Type of change indicator</td>
+<td style="text-align:left">—</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>Odkud</em></td>
+<td style="text-align:left">Source municipality code</td>
+<td style="text-align:left">municipality_code_giving_population_gain</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>Odkud (název obce)</em></td>
+<td style="text-align:left">Source municipality name</td>
+<td style="text-align:left">municipality_name_giving_population_gain</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>Kam</em></td>
+<td style="text-align:left">Destination municipality code</td>
+<td style="text-align:left">municipality_code_causing_population_loss</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>Kam (název obce)</em></td>
+<td style="text-align:left">Destination municipality name</td>
+<td style="text-align:left">municipality_name_causing_population_loss</td>
+</tr>
+</tbody>
+</table>
+<h3 id="gps-data-columns">GPS Data Columns</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Column Name</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Standardized Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><em>obec</em></td>
+<td style="text-align:left">Municipality name</td>
+<td style="text-align:left">municipality_name_gps</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>obeckod</em></td>
+<td style="text-align:left">Municipality code</td>
+<td style="text-align:left">municipality_code_gps</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>okres</em></td>
+<td style="text-align:left">(Former) county</td>
+<td style="text-align:left">county</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>okreskod</em></td>
+<td style="text-align:left">(Former) county code</td>
+<td style="text-align:left">county_code_gps</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>kraj</em></td>
+<td style="text-align:left">Region</td>
+<td style="text-align:left">region</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>krajkod</em></td>
+<td style="text-align:left">Region code</td>
+<td style="text-align:left">region_code</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>psc</em></td>
+<td style="text-align:left">Postal zip code</td>
+<td style="text-align:left">postal_code</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>sirka</em></td>
+<td style="text-align:left">Latitude (N)</td>
+<td style="text-align:left">latitude</td>
+</tr>
+<tr>
+<td style="text-align:left"><em>delka</em></td>
+<td style="text-align:left">Longitude (E)</td>
+<td style="text-align:left">longitude</td>
+</tr>
+</tbody>
+</table>
+<h3 id="data-exploration-and-quality-assessment">Data Exploration and Quality Assessment</h3>
+<p>Extensive exploratory data analysis (EDA) was conducted to understand the data quality and structure.</p>
+<h4 id="initial-cleaning-and-standardization">Initial Cleaning and Standardization</h4>
+<p>During the initial data exploration, several observations were made and applied at the beginning:</p>
+<ul>
+<li><strong>Column Naming:</strong>
+<ul>
+<li>All column names were standardized to English names.</li>
+<li>Inconsistent column names (e.g., 'KAM' vs 'Kam', 'Od kud' vs 'Odkud') were manually unified in two files (CZ0525, CZ0806)</li>
+</ul>
+</li>
+<li><strong>Missings:</strong>
+<ul>
+<li>Numeric columns containing strings like &quot;-&quot; or &quot;&quot; were converted to NaN.</li>
+<li>195 occurrences of sequence &quot;OPRAVA&quot; were treated as missing values.</li>
+</ul>
+</li>
+<li><strong>String Handling:</strong> Whitespaces were stripped from string columns.</li>
+<li><strong>Data Types:</strong>  All numeric columns were cast to integer types.</li>
+</ul>
+<h4 id="consistency-checks">Consistency Checks</h4>
+<p>The integrity of the dataset data was verified through the following checks:</p>
+<ul>
+<li><strong>Column Names:</strong> Verified that column names match across all files.</li>
+<li><strong>Uniqueness:</strong>
+<ul>
+<li>No duplicate records for (municipality_code + year).</li>
+<li>All municipality codes are uniquely assigned to a single county.</li>
+<li>Each row in GPS dataset has unique municipality code.</li>
+</ul>
+</li>
+<li><strong>Geography:</strong>
+<ul>
+<li>All GPS coordinates (longitude/latitude) are within Czech Republic boundaries.</li>
+<li>Postal codes (format 5 digits, range 10000-79999) and region codes (CZ NUTS 'CZxxx') are valid.</li>
+<li>County codes are valid except for ['CZ020B', 'CZ020C', 'CZ020A'].</li>
+<li>4 county codes in 528 rows differ from the county codes in GPS data.</li>
+<li>Only one municipality code from GPS file was not mapped (539996).</li>
+</ul>
+</li>
+<li><strong>Naming Consistency:</strong>
+<ul>
+<li>1:1 relationship confirmed for county_code_gps -&gt; county and region_code -&gt; region.</li>
+<li>169 municipality_codes found with more than one municipality_name.</li>
+<li>192 mismatches found between municipality_name and municipality_name_gps.</li>
+</ul>
+</li>
+<li><strong>Population Data Consistency:</strong>
+<ul>
+<li><code>population_at_establishment</code> is filled in 2112/6252 municipalities and once per municipality_code, and matches <code>population_at_start_of_year</code>.</li>
+<li>Found 1550 municipalities with non-continuous year history.</li>
+<li><strong>Population Balance:</strong> The fundamental demographic equation (Start + Births - Deaths + Immigrants - Emigrants = End) holds true for &gt;99% of the records (see Table).</li>
+<li><strong>Missing Values:</strong> A hypothesis that missing values in flow columns (births, deaths, etc.) represent zeros was tested and confirmed for &gt;99% of cases.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>Population data columns integrity</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:right"></th>
+<th style="text-align:left">column</th>
+<th style="text-align:right">formula_index</th>
+<th style="text-align:right">total_rows_checked</th>
+<th style="text-align:right">matches</th>
+<th style="text-align:right">match_percentage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">0</td>
+<td style="text-align:left">population_at_start_of_year</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">267551</td>
+<td style="text-align:right">266170</td>
+<td style="text-align:right">99.4838</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:left">number_of_births</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">220312</td>
+<td style="text-align:right">220312</td>
+<td style="text-align:right">100</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:left">number_of_deaths</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">220312</td>
+<td style="text-align:right">220312</td>
+<td style="text-align:right">100</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:left">number_of_immigrants</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">237494</td>
+<td style="text-align:right">237494</td>
+<td style="text-align:right">100</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td style="text-align:left">number_of_emigrants</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">237494</td>
+<td style="text-align:right">237494</td>
+<td style="text-align:right">100</td>
+</tr>
+<tr>
+<td style="text-align:right">5</td>
+<td style="text-align:left">natural_population_change</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">220312</td>
+<td style="text-align:right">220312</td>
+<td style="text-align:right">100</td>
+</tr>
+<tr>
+<td style="text-align:right">6</td>
+<td style="text-align:left">natural_population_change</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">223752</td>
+<td style="text-align:right">223752</td>
+<td style="text-align:right">100</td>
+</tr>
+<tr>
+<td style="text-align:right">7</td>
+<td style="text-align:left">migration_population_change</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">237494</td>
+<td style="text-align:right">237494</td>
+<td style="text-align:right">100</td>
+</tr>
+<tr>
+<td style="text-align:right">8</td>
+<td style="text-align:left">migration_population_change</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">223752</td>
+<td style="text-align:right">223752</td>
+<td style="text-align:right">100</td>
+</tr>
+<tr>
+<td style="text-align:right">9</td>
+<td style="text-align:left">total_population_change</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">223752</td>
+<td style="text-align:right">223752</td>
+<td style="text-align:right">100</td>
+</tr>
+<tr>
+<td style="text-align:right">10</td>
+<td style="text-align:left">total_population_change</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">267551</td>
+<td style="text-align:right">266170</td>
+<td style="text-align:right">99.4838</td>
+</tr>
+<tr>
+<td style="text-align:right">11</td>
+<td style="text-align:left">population_at_end_of_year</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">267551</td>
+<td style="text-align:right">266170</td>
+<td style="text-align:right">99.4838</td>
+</tr>
+</tbody>
+</table>
+<h4 id="missing-values-in-population-data">Missing values in Population Data</h4>
+<p>The dataset contains missing values just in the flow columns (births, deaths, migration, etc.).</p>
+<ul>
+<li>check hypotesis that missing population data should be zeros</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:right"></th>
+<th style="text-align:left">column</th>
+<th style="text-align:right">total_rows_with_nans</th>
+<th style="text-align:right">matches_with_zero_assumption</th>
+<th style="text-align:right">match_percentage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">0</td>
+<td style="text-align:left">number_of_births</td>
+<td style="text-align:right">5369</td>
+<td style="text-align:right">5353</td>
+<td style="text-align:right">99.702</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:left">number_of_deaths</td>
+<td style="text-align:right">5369</td>
+<td style="text-align:right">5353</td>
+<td style="text-align:right">99.702</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:left">number_of_immigrants</td>
+<td style="text-align:right">3720</td>
+<td style="text-align:right">3720</td>
+<td style="text-align:right">100</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:left">number_of_emigrants</td>
+<td style="text-align:right">3720</td>
+<td style="text-align:right">3720</td>
+<td style="text-align:right">100</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td style="text-align:left">natural_population_change</td>
+<td style="text-align:right">770</td>
+<td style="text-align:right">770</td>
+<td style="text-align:right">100</td>
+</tr>
+<tr>
+<td style="text-align:right">5</td>
+<td style="text-align:left">migration_population_change</td>
+<td style="text-align:right">779</td>
+<td style="text-align:right">779</td>
+<td style="text-align:right">100</td>
+</tr>
+<tr>
+<td style="text-align:right">6</td>
+<td style="text-align:left">total_population_change</td>
+<td style="text-align:right">781</td>
+<td style="text-align:right">781</td>
+<td style="text-align:right">100</td>
+</tr>
+</tbody>
+</table>
+<h4 id="territorial-changes-amendments">Territorial Changes (Amendments)</h4>
+<p>A significant portion of the analysis focused on the &quot;Amendment&quot; columns (territorial changes due to splitting/joining). The data was split into <code>amendment_df</code> (single changes in one year and references to multiple changes in one year) and <code>multi_amend_df</code> (multiple changes, source OD/KAM sheet).</p>
+<ul>
+<li><strong>Inconsistencies in Filling:</strong>
+<ul>
+<li><code>amendment_df</code>:
+<ul>
+<li>Found 3073 rows where population loss due to dividing and the causing municipality code are not consistently filled.</li>
+<li>Found 3403 rows where population gain due to joining and the giving municipality code are not consistently filled.</li>
+</ul>
+</li>
+<li><code>multi_amend_df</code>:
+<ul>
+<li>Found 3149 rows where population loss due to dividing and the causing municipality code are not consistently filled.</li>
+<li>Found 3151 rows where population gain due to joining and the giving municipality code are not consistently filled.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Sign Errors:</strong> Significant number of incorrect signs were found and partially corrected:
+<ul>
+<li><code>amendment_df</code>: Swapped values (10), Moved positive loss to gain (1318), Moved negative gain to loss (1926).</li>
+<li><code>multi_amend_df</code>: Moved positive loss to gain (1673), Moved negative gain to loss (1478).</li>
+</ul>
+</li>
+<li><strong>Mixed Missing Values:</strong> Datasets contain rows with mixed NaN/non-NaN values in loss/gain columns
+<ul>
+<li><code>amendment_df</code>:
+<ul>
+<li>301 loss issues</li>
+<li>175 gain issues.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Reference Issues:</strong>
+<ul>
+<li>References to <code>multi_amend_df</code> were inconsistent (e.g., 'x2', 'x2+8') and normalized.</li>
+<li>Expected sum of population changes in <code>multi_amend_df</code> did not match the reference in <code>amendment_df</code> in 96/1283 cases.</li>
+</ul>
+</li>
+<li><strong>Hypothesis Testing:</strong> Tested 6 hypotheses (see Table) on what influences amendment values. The best match (Hyp 1: Intra-year, NO influence) only matched 73.6% of cases.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Hypothesis</th>
+<th style="text-align:left">Description</th>
+<th style="text-align:left">Matches</th>
+<th style="text-align:left">Percentage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Hyp 1</td>
+<td style="text-align:left">Intra-year, NO influence</td>
+<td style="text-align:left">3916/5321</td>
+<td style="text-align:left">73.6%</td>
+</tr>
+<tr>
+<td style="text-align:left">Hyp 2</td>
+<td style="text-align:left">Intra-year, WITH influence</td>
+<td style="text-align:left">1319/5321</td>
+<td style="text-align:left">24.8%</td>
+</tr>
+<tr>
+<td style="text-align:left">Hyp 3</td>
+<td style="text-align:left">Inter-year, NO influence</td>
+<td style="text-align:left">783/5321</td>
+<td style="text-align:left">14.7%</td>
+</tr>
+<tr>
+<td style="text-align:left">Hyp 4</td>
+<td style="text-align:left">Inter-year, WITH influence</td>
+<td style="text-align:left">1326/5321</td>
+<td style="text-align:left">24.9%</td>
+</tr>
+<tr>
+<td style="text-align:left">Hyp 5</td>
+<td style="text-align:left">Intra-year, Sign Match</td>
+<td style="text-align:left">1398/5321</td>
+<td style="text-align:left">26.3%</td>
+</tr>
+<tr>
+<td style="text-align:left">Hyp 6</td>
+<td style="text-align:left">Inter-year, Sign Match</td>
+<td style="text-align:left">3821/5321</td>
+<td style="text-align:left">71.8%</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Conclusion:</strong> Due to the high volume of inconsistencies (sign errors, missing codes, mismatched sums), the explicit amendment data was deemed unreliable for modeling. Instead, the model relies on the implicit population changes captured in the main demographic columns.</li>
+</ul>
+<h4 id="yearly-data-coverage">Yearly Data Coverage</h4>
+<p>An analysis of the temporal coverage reveals that while the dataset spans from 1971 to 2020, not all municipalities have data for the entire period.</p>
+<ul>
+<li><strong>Minimum History:</strong> Every municipality in the dataset has at least 8 years of recorded data.</li>
+<li><strong>Completeness:</strong> A significant portion of municipalities have long, continuous histories, which is beneficial for time-series modeling.</li>
+</ul>
+<p><strong>Municipalities with Continuous History (ending in 2020):</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Start Year</th>
+<th style="text-align:left">Count</th>
+<th style="text-align:left">Percentage (of 6248)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">1971</td>
+<td style="text-align:left">4087</td>
+<td style="text-align:left">65.4%</td>
+</tr>
+<tr>
+<td style="text-align:left">1990</td>
+<td style="text-align:left">4138</td>
+<td style="text-align:left">66.2%</td>
+</tr>
+<tr>
+<td style="text-align:left">1991</td>
+<td style="text-align:left">5733</td>
+<td style="text-align:left">91.8%</td>
+</tr>
+<tr>
+<td style="text-align:left">1992</td>
+<td style="text-align:left">6065</td>
+<td style="text-align:left">97.1%</td>
+</tr>
+<tr>
+<td style="text-align:left">1993</td>
+<td style="text-align:left">6167</td>
+<td style="text-align:left">98.7%</td>
+</tr>
+<tr>
+<td style="text-align:left">1995</td>
+<td style="text-align:left">6210</td>
+<td style="text-align:left">99.4%</td>
+</tr>
+<tr>
+<td style="text-align:left">2000</td>
+<td style="text-align:left">6233</td>
+<td style="text-align:left">99.8%</td>
+</tr>
+<tr>
+<td style="text-align:left">2013</td>
+<td style="text-align:left">6248</td>
+<td style="text-align:left">100.0%</td>
+</tr>
+</tbody>
+</table>
+<p>The visualization below displays the distribution of years, history length, and continuous history availability.</p>
+<p><img src="images/image-2.png" alt="Year Distribution and History Length"></p>
+<h3 id="data-preprocessing-pipeline">Data Preprocessing Pipeline</h3>
+<p>Based on the EDA findings, the following preprocessing steps were finalized:</p>
+<ol>
+<li><strong>Filtering:</strong>
+<ul>
+<li>Removed amendment columns due to poor quality.</li>
+<li>Merged population data with GPS data; removed municipalities without mapping (see Figure).</li>
+<li>Excluded extinct municipalities (missing year 2020 or all numeric columns missing).</li>
+<li>Removed <code>population_at_establishment</code> as it was largely missing and redundant.</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>Distribution of Unique Municipality Codes: Matched vs Missing in GPS Data</li>
+</ul>
+<p><img src="images/image-7.png" alt="alt text"></p>
+<ol start="2">
+<li><strong>Imputation:</strong>
+<ul>
+<li><strong>Reconstruction:</strong> 121,910 missing population cells were mathematically reconstructed using the inter-year continuity and demographic equations.</li>
+<li><strong>Zero-filling:</strong> Remaining missing values in flow columns (births, deaths, migration) were filled with zeros (after proper validation).</li>
+<li><strong>Final Imputation:</strong> The remaining 100 rows with missings in the population at start of the year and end of the year were imputed with 100% completeness using the equations.</li>
+</ul>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Imputation precision</th>
+<th style="text-align:right">population_at_start_of_year</th>
+<th style="text-align:right">number_of_births</th>
+<th style="text-align:right">number_of_deaths</th>
+<th style="text-align:right">number_of_immigrants</th>
+<th style="text-align:right">number_of_emigrants</th>
+<th style="text-align:right">natural_population_change</th>
+<th style="text-align:right">migration_population_change</th>
+<th style="text-align:right">total_population_change</th>
+<th style="text-align:right">population_at_end_of_year</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">count</td>
+<td style="text-align:right">74</td>
+<td style="text-align:right">17115</td>
+<td style="text-align:right">10885</td>
+<td style="text-align:right">21416</td>
+<td style="text-align:right">6975</td>
+<td style="text-align:right">33858</td>
+<td style="text-align:right">16292</td>
+<td style="text-align:right">14265</td>
+<td style="text-align:right">1030</td>
+</tr>
+<tr>
+<td style="text-align:left">mean</td>
+<td style="text-align:right">551.77</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">377.15</td>
+</tr>
+<tr>
+<td style="text-align:left">std</td>
+<td style="text-align:right">616.951</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">408.06</td>
+</tr>
+<tr>
+<td style="text-align:left">min</td>
+<td style="text-align:right">72</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">32</td>
+</tr>
+<tr>
+<td style="text-align:left">25%</td>
+<td style="text-align:right">206.5</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">164</td>
+</tr>
+<tr>
+<td style="text-align:left">50%</td>
+<td style="text-align:right">322.5</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">259.5</td>
+</tr>
+<tr>
+<td style="text-align:left">75%</td>
+<td style="text-align:right">688.25</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">429.75</td>
+</tr>
+<tr>
+<td style="text-align:left">max</td>
+<td style="text-align:right">3206</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">4916</td>
+</tr>
+</tbody>
+</table>
+<p>The following visualizations illustrate the population data trends.</p>
+<ol>
+<li>When applying logarithmic scaling to the population at the start of the year, we observe a heavy-tailed distribution, indicating that while most municipalities have small populations, a few have very large populations.</li>
+<li>Total population trend over the years shows a steady increase in the overall population across municipalities.</li>
+<li>Birth vs Death trends show diverging development, first births outnumbering deaths, then converging, and finally deaths outnumbering births with exception around year 2010.</li>
+<li>Migration trends exhibit significant volatility, with periods of both positive and negative net migration, reflecting changing socio-economic conditions.</li>
+</ol>
+<p><img src="images/image-9.png" alt="alt text"></p>
+<p>The top municipalities by population are dominated by major cities, reflecting urbanization trends.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">municipality_code</th>
+<th style="text-align:left">population_at_start_of_year</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">554782</td>
+<td style="text-align:left">1308632</td>
+</tr>
+<tr>
+<td style="text-align:left">582786</td>
+<td style="text-align:left">390986</td>
+</tr>
+<tr>
+<td style="text-align:left">554821</td>
+<td style="text-align:left">331219</td>
+</tr>
+<tr>
+<td style="text-align:left">554791</td>
+<td style="text-align:left">175229</td>
+</tr>
+<tr>
+<td style="text-align:left">500496</td>
+<td style="text-align:left">106753</td>
+</tr>
+<tr>
+<td style="text-align:left">554804</td>
+<td style="text-align:left">106463</td>
+</tr>
+<tr>
+<td style="text-align:left">563889</td>
+<td style="text-align:left">104445</td>
+</tr>
+<tr>
+<td style="text-align:left">569810</td>
+<td style="text-align:left">101082</td>
+</tr>
+<tr>
+<td style="text-align:left">544256</td>
+<td style="text-align:left">99793</td>
+</tr>
+<tr>
+<td style="text-align:left">555134</td>
+<td style="text-align:left">96036</td>
+</tr>
+<tr>
+<td style="text-align:left">555088</td>
+<td style="text-align:left">92776</td>
+</tr>
+<tr>
+<td style="text-align:left">585068</td>
+<td style="text-align:left">87140</td>
+</tr>
+<tr>
+<td style="text-align:left">598917</td>
+<td style="text-align:left">81693</td>
+</tr>
+</tbody>
+</table>
+<p>The following figure summarizes the dataset columns distributions after preprocessing. The population data are highly skewed, with most municipalities having small populations but a few having very large populations. The outlier count is significant in population-related columns (10-15%).</p>
+<p><img src="images/image-4.png" alt="alt text"></p>
+<p>Correlation matrix below reveals strong relationships among demographic variables. Notably, next years total population change is highly correlated with both natural and migration changes, indicating that these components are key drivers of overall population dynamics.</p>
+<p><img src="images/image-8.png" alt="alt text"></p>
+<p>The following features relationship with total population change rate is visualized using scatter plots. It reflects that migration changes have a deeper relationship with total population change compared to natural changes.</p>
+<p><img src="images/image-5.png" alt="alt text"></p>
+<h2 id="modeling">Modeling</h2>
+<p>The modeling phase focused on developing a predictive framework to forecast the next-year population change rate for each municipality. Given the temporal nature of the data, the problem was approached as a time-series regression task. The primary objective was to build a model that generalizes well across municipalities of varying sizes, from small villages to large cities. To achieve this, a robust feature engineering strategy was developed to normalize the data and capture historical trends, followed by the evaluation of gradient boosting models against a simple baseline.</p>
+<h3 id="feature-engineering-and-split">Feature Engineering and Split</h3>
+<p>To prepare the data for time-series forecasting, several engineering steps were applied to ensure the models could learn temporal patterns independent of municipality size.</p>
+<p><strong>Feature Engineering:</strong></p>
+<ol>
+<li><strong>Normalization (Rates):</strong> All count-based variables (births, deaths, migration, total change) were converted to <strong>rates per capita</strong> (value / population at start of year). This allows the model to generalize across municipalities of vastly different sizes (from dozens to over a million inhabitants).</li>
+<li><strong>Temporal Features:</strong>
+<ul>
+<li><strong>Lags:</strong> Values from the previous 1, 2, and 3 years were added as features to capture immediate history.</li>
+<li><strong>Rolling Statistics:</strong> 5-year rolling means were calculated to capture longer-term trends.</li>
+</ul>
+</li>
+<li><strong>Static Features:</strong> <code>county_code</code>, <code>region_code</code>, <code>latitude</code>, and <code>longitude</code> were included to capture spatial dependencies.</li>
+<li><strong>Target Variable:</strong> The target is the <strong>next year's total population change rate</strong>.</li>
+<li><strong>Continuity Check:</strong> Only municipalities with at least 5 years of continuous history were retained to ensure valid rolling window calculations.</li>
+</ol>
+<blockquote>
+<p>Note: Gradient Boosting models work well with categorical features, non-standardized data (do not require scaling), and highly-correlated features.</p>
+</blockquote>
+<p><strong>Data Split:</strong>
+A temporal split was used to strictly prevent data leakage from the future:</p>
+<ul>
+<li><strong>Train:</strong> 1993–2014</li>
+<li><strong>Validation:</strong> 2015–2017</li>
+<li><strong>Test:</strong> 2018–2019</li>
+<li></li>
+</ul>
+<blockquote>
+<p>Note: The years before 1993 were excluded due to Czechoslovakia split, which could introduce non-stationarities.</p>
+</blockquote>
+<p><strong>Selected Features:</strong>
+The final feature set included:</p>
+<ul>
+<li><strong>Spatial:</strong> <code>latitude</code>, <code>longitude</code>, <code>region_code</code>, <code>county_code</code>.</li>
+<li><strong>Demographic Rates (Current, Lags 1-3, Rolling Mean 5y):</strong> <code>migration_population_change_rate</code>, <code>natural_population_change_rate</code>, <code>number_of_births_rate</code>, <code>number_of_deaths_rate</code>, <code>number_of_emigrants_rate</code>, <code>number_of_immigrants_rate</code>, <code>total_population_change_rate</code>.</li>
+<li><strong>Other:</strong> <code>log_population</code>, <code>year</code>.</li>
+</ul>
+<h3 id="training-strategy">Training Strategy</h3>
+<p>Three approaches were evaluated:</p>
+<ol>
+<li><strong>Baseline (Rolling Mean):</strong> A simple heuristic that predicts the next year's rate as the average of the last 5 years' rates. This serves as a benchmark for stability.</li>
+<li><strong>LightGBM:</strong> A gradient boosting model tuned for robustness.
+<ul>
+<li><em>Objective:</em> Huber loss (to be less sensitive to outliers).</li>
+<li><em>Parameters:</em> Learning rate 0.01, 3000 estimators, early stopping.</li>
+</ul>
+</li>
+<li><strong>XGBoost:</strong> A gradient boosting model using histogram-based tree methods.
+<ul>
+<li><em>Objective:</em> Pseudo-Huber error.</li>
+<li><em>Parameters:</em> Learning rate 0.01, Max depth 7.</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>Both ML models were trained using <strong>Mean Absolute Error (MAE)</strong> and robust loss functions as the evaluation metric, acknowledging that population changes can have significant outliers due to administrative changes or specific local events.</p>
+</blockquote>
+<h3 id="performance-evaluation">Performance Evaluation</h3>
+<p>The models were evaluated on the Test set (2018-2019). We assessed performance both on the primary target (Rate per 1000) and the reconstructed Absolute Population Change.</p>
+<p><strong>1. Rate Prediction</strong>
+The Machine Learning models successfully outperformed the baseline in predicting the <em>rate</em> of change.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Model</th>
+<th style="text-align:left">MAE</th>
+<th style="text-align:left">RMSE</th>
+<th style="text-align:left">MedAE</th>
+<th style="text-align:left">R2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Baseline</td>
+<td style="text-align:left">0.0186</td>
+<td style="text-align:left">0.0275</td>
+<td style="text-align:left">0.0126</td>
+<td style="text-align:left">-0.0492</td>
+</tr>
+<tr>
+<td style="text-align:left">LightGBM</td>
+<td style="text-align:left">0.0174</td>
+<td style="text-align:left">0.0258</td>
+<td style="text-align:left">0.0117</td>
+<td style="text-align:left">0.0788</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>XGBoost</strong></td>
+<td style="text-align:left"><strong>0.0174</strong></td>
+<td style="text-align:left"><strong>0.0258</strong></td>
+<td style="text-align:left"><strong>0.0116</strong></td>
+<td style="text-align:left"><strong>0.0775</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>XGBoost</strong> achieved the lowest Median Absolute Error (MedAE), indicating it is the most accurate for the &quot;typical&quot; municipality.</li>
+<li>The Baseline's negative R2 indicates it fails to capture the variance in the rates better than a horizontal line (mean), whereas ML models show positive predictive power.</li>
+</ul>
+<p><strong>2. Absolute Change Reconstruction</strong>
+When converting rates back to absolute numbers (Rate * Population), the picture is nuanced.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Model</th>
+<th style="text-align:left">MAE</th>
+<th style="text-align:left">RMSE</th>
+<th style="text-align:left">MedAE</th>
+<th style="text-align:left">R2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Baseline</strong></td>
+<td style="text-align:left"><strong>11.97</strong></td>
+<td style="text-align:left"><strong>47.10</strong></td>
+<td style="text-align:left">5.83</td>
+<td style="text-align:left"><strong>0.930</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">LightGBM</td>
+<td style="text-align:left">13.49</td>
+<td style="text-align:left">110.37</td>
+<td style="text-align:left">5.39</td>
+<td style="text-align:left">0.617</td>
+</tr>
+<tr>
+<td style="text-align:left">XGBoost</td>
+<td style="text-align:left">12.55</td>
+<td style="text-align:left">111.49</td>
+<td style="text-align:left"><strong>5.36</strong></td>
+<td style="text-align:left">0.609</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Median Performance:</strong> XGBoost has the lowest MedAE (5.36), meaning for the majority of municipalities, the ML prediction is closer to the truth than the Baseline (5.83).</li>
+<li><strong>Large Scale Performance:</strong> The Baseline dominates in RMSE and R2. This suggests that for large municipalities (which heavily influence squared errors), the simple &quot;recent history&quot; heuristic is extremely stable and hard to beat. ML models, by trying to predict complex rate dynamics, may introduce noise that scales up poorly for the largest cities.</li>
+</ul>
+<p><strong>3. Feature Importance</strong></p>
+<p>Feature importance analysis from the XGBoost model reveals that rolling means of total population change is the most influential predictors, followed by various migration-related features.</p>
+<p><img src="images/image10.png" alt="alt text"></p>
+<p><strong>Conclusion:</strong>
+XGBoost is the preferred model for understanding local dynamics and predicting changes for the typical municipality (better MedAE). However, for aggregate national statistics or large cities, the 5-year rolling mean (Baseline) remains a highly competitive and stable predictor.</p>
+<h2 id="conclusions">Conclusions</h2>
+<p>This project successfully demonstrated the feasibility of predicting municipal population changes using machine learning, while also highlighting significant challenges in data quality and scalability.</p>
+<h3 id="key-findings">Key Findings</h3>
+<ol>
+<li><strong>Data Quality:</strong> The primary dataset required extensive cleaning. Specifically, the &quot;amendment&quot; data (territorial changes) was found to be highly inconsistent and was excluded. However, the implicit population changes were successfully reconstructed and imputed, resulting in a complete dataset for modeling.</li>
+<li><strong>Model Performance:</strong>
+<ul>
+<li><strong>XGBoost</strong> emerged as the best model for the &quot;typical&quot; municipality, achieving the lowest Median Absolute Error (MedAE). It effectively captures local dynamics and non-linear relationships.</li>
+<li><strong>Baseline (Rolling Mean)</strong> proved to be surprisingly robust, particularly for minimizing large errors (RMSE) and explaining overall variance (R2). This suggests that for large population centers, recent history is a very strong predictor that is hard to beat with complex models.</li>
+</ul>
+</li>
+<li><strong>Scalability:</strong> The discrepancy between MedAE and RMSE suggests that a &quot;one-size-fits-all&quot; model may not be optimal. Small municipalities behave differently from large cities.</li>
+</ol>
+<h3 id="recommendations-and-future-work">Recommendations and Future Work</h3>
+<ul>
+<li><strong>Hybrid Approach:</strong> For future deployment, a hybrid strategy is recommended: use the <strong>Baseline (Rolling Mean)</strong> for large cities to ensure stability, and <strong>XGBoost</strong> for smaller municipalities to capture more subtle trends.</li>
+<li><strong>Data Collection:</strong> Improvements in the reporting of territorial changes (amendments) are necessary to allow for more precise modeling of administrative shifts.</li>
+<li><strong>Additional Features:</strong> Incorporating economic indicators (unemployment rate, housing construction) could potentially improve the model's ability to predict migration patterns, which are currently the hardest component to forecast.</li>
+</ul>
+
+</body>
+</html>

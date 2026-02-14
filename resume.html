@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- před odesláním:
+- co nejstručnější (1-2str A4)
+- odstranit nerelevantní věci
+- přidat do summary relevantní k práci
+-->
+
 <head>
     <meta charset="utf-8" />
     <title>Tomáš Novotný · Resume</title>
@@ -18,6 +24,10 @@
             margin: 0;
             background: #f5f7fa;
             color: #1c1f26;
+        }
+
+        .page-wrapper {
+            min-height: 100vh;
         }
 
         header {
@@ -287,6 +297,12 @@
                 line-height: 1.35;
             }
 
+            /* Limit printable content to two pages */
+            .page-wrapper {
+                max-height: 550mm;
+                overflow: hidden;
+            }
+
             /* Compact header for print */
             header {
                 background: none;
@@ -520,30 +536,31 @@
 </head>
 
 <body>
-    <header>
-        <div class="header-content">
-            <h1>Tomáš Novotný</h1>
-            <p class="tagline">Highly organized, hard-working and communicative engineer with a strong mathematical
-                foundation and with hands-on experience in optimization, applied AI, and software development.</p>
-            <p>
-                <a href="mailto:tomnovota@seznam.cz" style="color:#fff;">tomnovota@seznam.cz</a> ·
-                <a href="tel:+420792342131" style="color:#fff;">(+420) 792 342 131</a> ·
-                <a href="https://www.linkedin.com/in/tomnovota/" style="color:#fff;">LinkedIn</a> ·
-                <a href="https://github.com/tomnovota" style="color:#fff;">GitHub</a> ·
-                Prague, Czechia
-            </p>
-            <div class="header-actions">
-                <button type="button" class="download-btn" id="download-pdf">Download printable PDF</button>
+    <div class="page-wrapper">
+        <header>
+            <div class="header-content">
+                <h1>Tomáš Novotný</h1>
+                <p class="tagline">Highly organized, hard-working and communicative engineer with a strong mathematical
+                    foundation and with hands-on experience in optimization, applied AI, and software development.</p>
+                <p>
+                    <a href="mailto:tomnovota@seznam.cz" style="color:#fff;">tomnovota@seznam.cz</a> ·
+                    <a href="tel:+420792342131" style="color:#fff;">(+420) 792 342 131</a> ·
+                    <a href="https://www.linkedin.com/in/tomnovota/" style="color:#fff;">LinkedIn</a> ·
+                    <a href="https://github.com/tomnovota" style="color:#fff;">GitHub</a> ·
+                    Prague, Czechia
+                </p>
+                <div class="header-actions">
+                    <button type="button" class="download-btn" id="download-pdf">Download printable PDF</button>
+                </div>
             </div>
-        </div>
-        <img class="profile-photo" src="profile.jpeg" alt="Profile picture of Tomáš Novotný" />
-    </header>
+            <img class="profile-photo" src="profile.jpeg" alt="Profile picture of Tomáš Novotný" />
+        </header>
 
-    <main>
-        <nav data-auto-nav></nav>
+        <main>
+            <nav data-auto-nav></nav>
 
-        <div class="content">
-            <section id="experience">
+            <div class="content">
+                <section id="experience">
                 <h2>Professional Experience</h2>
                 <div class="item">
                     <div class="meta">Jul 2024 – Jun 2025 · Prague</div>
@@ -567,9 +584,9 @@
                     <strong>Technical Support Operator, Starnet</strong>
                     <span>Resolved customer connectivity problems and coordinated service escalations.</span>
                 </div>
-            </section>
+                </section>
 
-            <section id="freelance">
+                <section id="freelance">
                 <h2>Freelance Experience</h2>
                 <div class="item">
                     <div class="meta">2024 – Present · Prague</div>
@@ -591,9 +608,9 @@
                     <strong>Business Analysis & Solution Proposal, Heli Food Fresh a.s.</strong>
                     <span>Conducted business discovery and recommended data-driven solutions.</span>
                 </div>
-            </section>
+                </section>
 
-            <section id="education">
+                <section id="education">
                 <h2>Education</h2>
                 <div class="item">
                     <div class="meta">Jun 2024 – Present · Prague</div>
@@ -609,9 +626,9 @@
                     <div class="meta">Sep 2013 – Jun 2021 · České Budějovice</div>
                     <strong>Gymnázium České Budějovice, Česká 64</strong>
                 </div> -->
-            </section>
+                </section>
 
-            <section id="self-development">
+                <section id="self-development">
                 <h2>Extra Activities</h2>
                 <div class="activity-list">
                     <span class="activity">prg.ai Industry Talks</span>
@@ -624,23 +641,23 @@
                     <span class="separator" aria-hidden="true">&bull;</span>
                     <span class="activity">SVOČ 2024 Competition</span>
                 </div>
-            </section>
+                </section>
 
             <!-- <section id="projects">
                 <h2>Projects Portfolio</h2>
                 <p>Portfolio section in progress.</p>
             </section>
  -->
-            <section id="publications">
+                <section id="publications">
                 <h2>Publications</h2>
                 <div class="item">
                     <strong>Kernel Estimates of Pedestrian Density Applied in Simulation of Recreational Pedestrian
                         Movement</strong>
                     <a href="https://doi.org/10.1007/978-3-031-85703-4_23">doi:10.1007/978-3-031-85703-4_23</a>
                 </div>
-            </section>
+                </section>
 
-            <section id="honors">
+                <section id="honors">
                 <h2>Honors & Awards</h2>
                 <div class="item">
                     <div class="meta">2024</div>
@@ -648,9 +665,29 @@
                     <span>Faculty of Information Technology, CTU</span>
                     <span>Recognized for publishing peer-reviewed research.</span>
                 </div>
-            </section>
+                </section>
 
-            <section id="teaching" class="collapsible" data-nav-title="Teaching Experience">
+                <section id="volunteering">
+                <h2>Volunteering</h2>
+                <div class="item">
+                    <div class="meta">Feb 2020 · Karlovy Vary</div><strong>Caregiver, Coronavirus Unit, KKN</strong>
+                </div>
+                <div class="item">
+                    <div class="meta">Feb 2020 – Aug 2020 · Týn nad Vltavou</div><strong>Website Consultant, Municipal
+                        Office</strong>
+                </div>
+                <div class="item">
+                    <div class="meta">2018 – 2021 · Prague</div><strong>Minecraft Cup Organiser, Microsoft</strong>
+                </div>
+                </section>
+
+                <section id="hobbies">
+                <h2>Hobbies</h2>
+                <p>Team sports · Traveling · Cuban Salsa · Music</p>
+                </section>
+
+
+                <section id="teaching" class="collapsible" data-nav-title="Teaching Experience">
                 <details>
                     <summary>Teaching Experience</summary>
                     <div class="collapsible-content">
@@ -662,12 +699,12 @@
                         <div class="item">
                             <div class="meta">Sep 2022 – Dec 2023 · Prague</div>
                             <strong>Math Tutor, Populo</strong>
-                            <span>Guided 7 students (ages 12–20) through advanced mathematics topics.</span>
+                            <span>Guided 7 students (ages 12–20) through mathematics topics.</span>
                         </div>
                         <div class="item">
                             <div class="meta">Dec 2020 – Jun 2021 · České Budějovice</div>
                             <strong>Math Tutor, Private Tutoring</strong>
-                            <span>Supported four students preparing for exams and competitions.</span>
+                            <span>Supported 4 students preparing for exams and competitions.</span>
                         </div>
                         <div class="item">
                             <div class="meta">Sep 2020 · České Budějovice</div>
@@ -676,9 +713,9 @@
                         </div>
                     </div>
                 </details>
-            </section>
+                </section>
 
-            <section id="other-work" class="collapsible" data-nav-title="Other Work Experience">
+                <section id="other-work" class="collapsible" data-nav-title="Other Work Experience">
                 <details>
                     <summary>Other Work Experience</summary>
                     <div class="collapsible-content">
@@ -701,60 +738,43 @@
                         </div>
                     </div>
                 </details>
-            </section>
+                </section>
 
-            <section id="volunteering">
-                <h2>Volunteering</h2>
-                <div class="item">
-                    <div class="meta">Feb 2020 · Karlovy Vary</div><strong>Caregiver, Coronavirus Unit, KKN</strong>
-                </div>
-                <div class="item">
-                    <div class="meta">Feb 2020 – Aug 2020 · Týn nad Vltavou</div><strong>Website Consultant, Municipal
-                        Office</strong>
-                </div>
-                <div class="item">
-                    <div class="meta">2018 – 2021 · Prague</div><strong>Minecraft Cup Organiser, Microsoft</strong>
-                </div>
-            </section>
+            </div>
 
-            <section id="hobbies">
-                <h2>Hobbies</h2>
-                <p>Team sports · Traveling · Cuban Salsa · Music</p>
-            </section>
-        </div>
-
-        <aside class="sticky-panel">
-            <section id="skills">
-                <h2>Skills</h2>
-                <p>
-                <div class="chips">
-                    <span class="chip">Machine Learning</span>
-                    <span class="chip">Data Science</span>
-                    <span class="chip">Optimization</span>
-                    <span class="chip">Machine Vision</span>
-                    <span class="chip">App Development</span>
-                    <span class="chip">Knowledge-based Systems</span>
-                    <span class="chip">Agent-based Models</span>
-                    <span class="chip">Stochastic Processes</span>
-                </div>
-                </p>
-                <details open>
-                    <summary>Programming & Scripting</summary>
-                    <p><strong>Experienced:</strong> C/C++, Python, Kotlin</p>
-                    <p><strong>Familiar:</strong> Julia, R, PostgreSQL, Bash</p>
-                </details>
-                <details open>
-                    <summary>Tools & Libraries</summary>
-                    <p>Git (Lab/Hub, Bitbucket), Conda, Docker, Jupyter, Atlassian (Confluence, Jira)</p>
-                    <p><strong>Libraries:</strong> scikit-learn, PyTorch, tensorflow, pandas, Matplotlib, OpenCV</p>
-                </details>
-                <details open>
-                    <summary>Languages</summary>
-                    <p><strong>Fluent:</strong> English · <strong>Intermediate:</strong> German
-                </details>
-            </section>
-        </aside>
-    </main>
+            <aside class="sticky-panel">
+                <section id="skills">
+                    <h2>Skills</h2>
+                    <p>
+                    <div class="chips">
+                        <span class="chip">Machine Learning</span>
+                        <span class="chip">Data Science</span>
+                        <span class="chip">Optimization</span>
+                        <span class="chip">Machine Vision</span>
+                        <span class="chip">App Development</span>
+                        <span class="chip">Knowledge-based Systems</span>
+                        <span class="chip">Agent-based Models</span>
+                        <span class="chip">Stochastic Processes</span>
+                    </div>
+                    </p>
+                    <details open>
+                        <summary>Programming & Scripting</summary>
+                        <p><strong>Experienced:</strong> C/C++, Python, Kotlin</p>
+                        <p><strong>Familiar:</strong> Julia, R, PostgreSQL, Bash</p>
+                    </details>
+                    <details open>
+                        <summary>Tools & Libraries</summary>
+                        <p>Git (Lab/Hub, Bitbucket), Conda, Docker, Jupyter, Atlassian (Confluence, Jira)</p>
+                        <p><strong>Libraries:</strong> scikit-learn, PyTorch, tensorflow, pandas, Matplotlib, OpenCV</p>
+                    </details>
+                    <details open>
+                        <summary>Languages</summary>
+                        <p><strong>Fluent:</strong> English · <strong>Intermediate:</strong> German
+                    </details>
+                </section>
+            </aside>
+        </main>
+    </div>
 
     <script>
         const header = document.querySelector("header");
