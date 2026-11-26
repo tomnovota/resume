@@ -2,7 +2,7 @@
 
 **AI Engineer** · Prague, Czechia
 
-Applied ML and optimization engineer with 3+ years of experience building recommender systems, scheduling, computer vision, and robotics solutions.
+Applied ML and optimization engineer with 3+ years of experience in recommender systems, machine learning, optimization, computer vision, and robotics.
 
 [**View CV**](https://tomnovota.github.io/resume/) · [Email](mailto:tomas.novotny.personal@gmail.com) · [GitHub](https://github.com/tomnovota) · [LinkedIn](https://www.linkedin.com/in/tomnovota/)
 

@@ -29,16 +29,16 @@ jobs:
 
       - name: Prepare static site
         run: |
-          mkdir -p _site
+          mkdir -p _site/pic
           cp resume.html _site/index.html
-          cp profile.jpeg _site/profile.jpeg
+          cp pic/profile.jpg _site/pic/profile.jpg
           cp -r portfolio _site/portfolio
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: _site
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
