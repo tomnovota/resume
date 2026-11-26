@@ -47,6 +47,7 @@
         }
 
         header {
+            position: relative;
             padding: 2.5rem clamp(1.5rem, 3vw, 3rem) 1.5rem;
             background: linear-gradient(160deg, #3a7bd5, #00d2ff);
             color: #fff;
@@ -84,6 +85,37 @@
 
         .header-content {
             max-width: 48rem;
+        }
+
+        .lang-switcher {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            gap: .4rem;
+            z-index: 20;
+        }
+
+        .lang-switcher button {
+            background: rgba(255, 255, 255, .92);
+            color: #1c3a6a;
+            border: 1px solid rgba(28, 58, 106, .25);
+            border-radius: 999px;
+            padding: .32rem .7rem;
+            font-size: .82rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform .12s ease, box-shadow .12s ease;
+        }
+
+        .lang-switcher button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 14px rgba(15, 44, 71, .22);
+        }
+
+        .lang-switcher button.active {
+            background: #fff;
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, .45) inset;
         }
 
         .header-actions {
@@ -376,6 +408,7 @@
 
             /* hide interactive parts */
             nav,
+            .lang-switcher,
             .download-btn,
             footer,
             .header-actions {
@@ -590,6 +623,12 @@
                 justify-content: center;
             }
 
+            .lang-switcher {
+                position: static;
+                justify-content: center;
+                margin-bottom: .5rem;
+            }
+
             .profile-photo {
                 justify-self: center;
                 margin: 1.5rem auto 0;
@@ -630,12 +669,18 @@
 <body>
     <div class="page-wrapper">
         <header>
+            <nav class="lang-switcher" aria-label="Language">
+                <button type="button" data-lang="en" class="active">EN</button>
+                <button type="button" data-lang="de">DE</button>
+                <button type="button" data-lang="cs">CS</button>
+                <button type="button" data-lang="zh">中文</button>
+            </nav>
             <div class="header-content">
                 <h1>Tomáš Novotný</h1>
-                <p class="tagline">Applied ML and optimization engineer with 3+ years of experience in recommender
+                <p class="tagline" data-i18n="tagline">Applied ML and optimization engineer with 3+ years of experience in recommender
                     systems, machine learning, optimization, computer vision, and robotics.
                 </p>
-                <p class="online-resume">Full interactive CV: <a
+                <p class="online-resume" data-i18n-html="online-resume">Full interactive CV: <a
                         href="https://tomnovota.github.io/resume/">tomnovota.github.io/resume</a></p>
                 <p>
                     <a href="mailto:tomas.novotny.personal@gmail.com"
@@ -645,7 +690,7 @@
                     <a href="https://github.com/tomnovota/resume" style="color:#fff;">GitHub</a>
                 </p>
                 <div class="header-actions">
-                    <button type="button" class="download-btn" id="download-pdf">Download printable PDF</button>
+                    <button type="button" class="download-btn" id="download-pdf" data-i18n="download-pdf-btn">Download printable PDF</button>
                 </div>
             </div>
             <img class="profile-photo" src="pic/profile.jpg" alt="Profile picture of Tomáš Novotný" />
@@ -656,90 +701,90 @@
 
             <div class="content">
                 <section id="experience">
-                    <h2>Professional Experience</h2>
+                    <h2 data-i18n="exp-heading">Professional Experience</h2>
                     <div class="item">
                         <div class="meta">Oct 2024 – Dec 2025 · Prague</div>
-                        <strong>LLMs & Web Development, AI dětem</strong>
-                        <span>Tuned prompts for an interactive student chatbot, improving response quality and
+                        <strong data-i18n="job-ai-detem">LLMs & Web Development, AI dětem</strong>
+                        <span data-i18n="ai-detem-1">Tuned prompts for an interactive student chatbot, improving response quality and
                             reliability.</span>
-                        <span>Built a web app for managing questionnaires and data-collection pipelines.</span>
-                        <span>Deisgned a tool that digitizes and auto-corrects student worksheets.</span>
+                        <span data-i18n="ai-detem-2">Built a web app for managing questionnaires and data-collection pipelines.</span>
+                        <span data-i18n="ai-detem-3">Designed a tool that digitizes and auto-corrects student worksheets.</span>
                     </div>
                     <div class="item">
                         <div class="meta">Jun 2025 · Prague</div>
-                        <strong>AI Training for Employees, ECOM s.r.o.</strong>
-                        <span>Designed and delivered practical AI upskilling workshops.</span>
+                        <strong data-i18n="job-ecom">AI Training for Employees, ECOM s.r.o.</strong>
+                        <span data-i18n="ecom-1">Designed and delivered practical AI upskilling workshops.</span>
                     </div>
                     <div class="item">
                         <div class="meta">Apr 2025 – Jun 2025 · Prague</div>
-                        <strong>Business Analysis & Solution Proposal, Heli Food Fresh a.s.</strong>
-                        <span>Analyzed a visual-inspection problem and recommended a computer-vision solution.</span>
+                        <strong data-i18n="job-heli">Business Analysis & Solution Proposal, Heli Food Fresh a.s.</strong>
+                        <span data-i18n="heli-1">Analyzed a visual-inspection problem and recommended a computer-vision solution.</span>
                     </div>
                     <div class="item">
                         <div class="meta">Jul 2024 – Jun 2025 · Prague</div>
-                        <strong>AI Developer, Blindspot Solutions</strong>
-                        <span>Solved a complex manufacturing scheduling problem with state-of-the-art optimization
+                        <strong data-i18n="job-blindspot">AI Developer, Blindspot Solutions</strong>
+                        <span data-i18n="blindspot-1">Solved a complex manufacturing scheduling problem with state-of-the-art optimization
                             techniques (Kotlin).</span>
-                        <span>Worked directly with the client to resolve data inconsistencies in a cross-functional
+                        <span data-i18n="blindspot-2">Worked directly with the client to resolve data inconsistencies in a cross-functional
                             team.</span>
                     </div>
                     <div class="item">
                         <div class="meta">Oct 2022 – Jun 2023 · České Budějovice</div>
-                        <strong>AI Intern, Bosch</strong>
-                        <span>Got familiar with AI applications in manufacturing environment.</span>
-                        <span>Worked on small tasks like creating a Python GUI and improving transfer-learning
+                        <strong data-i18n="job-bosch">AI Intern, Bosch</strong>
+                        <span data-i18n="bosch-1">Got familiar with AI applications in manufacturing environment.</span>
+                        <span data-i18n="bosch-2">Worked on small tasks like creating a Python GUI and improving transfer-learning
                             scripts.</span>
                     </div>
                 </section>
 
                 <section id="projects">
-                    <h2>Projects Portfolio</h2>
-                    <p style="margin-top:0;">Full collection on
+                    <h2 data-i18n="projects-heading">Projects Portfolio</h2>
+                    <p style="margin-top:0;" data-i18n-html="projects-note">Full collection on
                         <a href="https://github.com/tomnovota/resume/tree/main/portfolio">GitHub</a>.
                     </p>
                     <div class="item">
                         <strong><a
                                 href="https://raw.githubusercontent.com/tomnovota/resume/main/portfolio/machine%20learning%20projects/pml%20-%20paper.pdf">Sparse
                                 Embedding Compression for Recommender Systems</a></strong>
-                        <span>Evaluation of TopK and Gated TopK sparsification in the CompresSAE framework.</span>
+                        <span data-i18n="proj-pml">Evaluation of TopK and Gated TopK sparsification in the CompresSAE framework.</span>
                     </div>
                     <div class="item">
                         <strong><a
                                 href="https://raw.githubusercontent.com/tomnovota/resume/main/portfolio/machine%20learning%20projects/mvi%20-%20paper.pdf">Age-Appropriateness
                                 Classification of Czech Texts</a></strong>
-                        <span>Fine-tuned a Czech RoBERTa model on the Czech National Corpus to classify text
+                        <span data-i18n="proj-mvi">Fine-tuned a Czech RoBERTa model on the Czech National Corpus to classify text
                             age-appropriateness.</span>
                     </div>
                     <div class="item">
                         <strong><a
                                 href="https://tomnovota.github.io/resume/portfolio/machine%20learning%20projects/mlp%20-%20project.html">Predicting
                                 Population Changes in Czech Municipalities</a></strong>
-                        <span>End-to-end CRISP-DM project forecasting demographic trends from 50 years of data.</span>
+                        <span data-i18n="proj-mlp">End-to-end CRISP-DM project forecasting demographic trends from 50 years of data.</span>
                     </div>
                     <div class="item">
                         <strong><a
                                 href="https://tomnovota.github.io/resume/portfolio/machine%20learning%20projects/scr%20-%20project.html">Time
                                 Series Analysis of Tourist Accommodation Occupancy in Czechia</a></strong>
-                        <span>Statistical forecasting of accommodation-occupancy trends.</span>
+                        <span data-i18n="proj-scr">Statistical forecasting of accommodation-occupancy trends.</span>
                     </div>
                     <div class="item">
                         <strong><a
                                 href="https://raw.githubusercontent.com/tomnovota/resume/main/portfolio/optimization%20projects/kop%20-%20project.pdf">Advanced
                                 Heuristics for Weighted MAX-SAT</a></strong>
-                        <span>Simulated-annealing variant with adaptive mechanisms for weighted Boolean
+                        <span data-i18n="proj-kop">Simulated-annealing variant with adaptive mechanisms for weighted Boolean
                             satisfiability.</span>
                     </div>
                     <div class="item">
                         <strong><a
                                 href="https://github.com/tomnovota/resume/blob/main/portfolio/machine%20vision%20homeworks/svz04.ipynb">Thermal
                                 &amp; RGB Camera Measurement Pipeline</a></strong>
-                        <span>Computer-vision pipeline combining thermal and RGB data for projective transforms,
+                        <span data-i18n="proj-svz">Computer-vision pipeline combining thermal and RGB data for projective transforms,
                             segmentation, and real-unit measurement.</span>
                     </div>
                 </section>
 
                 <section id="education">
-                    <h2>Education</h2>
+                    <h2 data-i18n="edu-heading">Education</h2>
                     <div class="item">
                         <div class="meta">Jun 2024 – Expected Jun 2027 · Prague</div>
                         <strong>Master of Science, Knowledge Engineering</strong>
@@ -747,7 +792,7 @@
                     </div>
                     <div class="item">
                         <div class="meta">Sep 2026 – Dec 2026 · Taipei</div>
-                        <strong>Exchange Semester</strong>
+                        <strong data-i18n="edu-exchange">Exchange Semester</strong>
                         <span>National Taiwan University, Graduate Institute of Computer Science</span>
                     </div>
                     <div class="item">
@@ -756,7 +801,7 @@
                         <span>Czech Technical University, Faculty of Information Technology</span>
                     </div>
 
-                    <h3 style="margin: 1.25rem 0 .5rem; font-size: 1.1rem; color: #3a7bd5;">Notable Extra Coursework
+                    <h3 style="margin: 1.25rem 0 .5rem; font-size: 1.1rem; color: #3a7bd5;" data-i18n="coursework-heading">Notable Extra Coursework
                     </h3>
                     <div class="chips">
                         <span class="chip"> Human-AI Interaction and
@@ -784,7 +829,7 @@
                 </section>
 
                 <section id="publications">
-                    <h2>Publications</h2>
+                    <h2 data-i18n="pub-heading">Publications</h2>
                     <div class="item">
                         <strong>Kernel Estimates of Pedestrian Density Applied in Simulation of Recreational Pedestrian
                             Movement</strong>
@@ -793,7 +838,7 @@
                 </section>
 
                 <section id="self-development">
-                    <h2>Self-Development</h2>
+                    <h2 data-i18n="dev-heading">Self-Development</h2>
                     <div class="activity-list">
                         <span class="activity">prg.ai Minor</span>
                         <span class="separator" aria-hidden="true">&bull;</span>
@@ -808,52 +853,52 @@
                 </section>
 
                 <section id="honors">
-                    <h2>Honors & Awards</h2>
+                    <h2 data-i18n="honors-heading">Honors & Awards</h2>
                     <div class="item">
                         <div class="meta">2024</div>
                         <strong>Research Summer Award</strong>
                         <span>Faculty of Information Technology, CTU</span>
-                        <span>Recognized for publishing peer-reviewed research.</span>
+                        <span data-i18n="honors-1">Recognized for publishing peer-reviewed research.</span>
                     </div>
                 </section>
 
                 <section id="hobbies">
-                    <h2>Hobbies</h2>
-                    <p>Team sports · Traveling · Cuban Salsa · Piano</p>
+                    <h2 data-i18n="hobbies-heading">Hobbies</h2>
+                    <p data-i18n="hobbies-1">Team sports · Traveling · Cuban Salsa · Piano</p>
                 </section>
 
                 <section id="other-work" class="collapsible" data-nav-title="Other Work Experience">
                     <details>
-                        <summary>Other Work Experience</summary>
+                        <summary data-i18n="other-heading">Other Work Experience</summary>
                         <div class="collapsible-content">
                             <div class="item">
                                 <div class="meta">Dec 2021 – Sep 2022 · Prague</div>
-                                <strong>IT Technician, SP-IT Limited</strong>
-                                <span>Diagnosed hardware/software issues, performed repairs, prophylaxis, and network
+                                <strong data-i18n="other-it-tech">IT Technician, SP-IT Limited</strong>
+                                <span data-i18n="other-it-tech-desc">Diagnosed hardware/software issues, performed repairs, prophylaxis, and network
                                     maintenance.</span>
                             </div>
                             <div class="item">
                                 <div class="meta">Apr 2018 – Feb 2021 · České Budějovice</div>
-                                <strong>Technical Support Operator, Starnet</strong>
-                                <span>Resolved customer connectivity problems and coordinated service
+                                <strong data-i18n="other-support">Technical Support Operator, Starnet</strong>
+                                <span data-i18n="other-support-desc">Resolved customer connectivity problems and coordinated service
                                     escalations.</span>
                             </div>
                             <div class="item">
-                                <div class="meta">Mar 2021 – Jun 2021 · České Budějovice</div><strong>Parcel Delivery
+                                <div class="meta">Mar 2021 – Jun 2021 · České Budějovice</div><strong data-i18n="other-parcel">Parcel Delivery
                                     Driver, Česká
                                     pošta</strong>
                             </div>
                             <div class="item">
-                                <div class="meta">Sep 2020 – Oct 2020 · České Budějovice</div><strong>Fast Food Delivery
+                                <div class="meta">Sep 2020 – Oct 2020 · České Budějovice</div><strong data-i18n="other-fastfood">Fast Food Delivery
                                     Driver,
                                     Prorozvoz</strong>
                             </div>
                             <div class="item">
-                                <div class="meta">Jul 2020 – Aug 2021 · Vyšší Brod</div><strong>Boat Rental Driver, Petr
+                                <div class="meta">Jul 2020 – Aug 2021 · Vyšší Brod</div><strong data-i18n="other-boat">Boat Rental Driver, Petr
                                     Putzer</strong>
                             </div>
                             <div class="item">
-                                <div class="meta">Aug 2017 – Sep 2017 · Planá</div><strong>Factory Worker,
+                                <div class="meta">Aug 2017 – Sep 2017 · Planá</div><strong data-i18n="other-factory">Factory Worker,
                                     Achilles</strong>
                             </div>
                         </div>
@@ -862,27 +907,27 @@
 
                 <section id="teaching" class="collapsible" data-nav-title="Teaching Experience">
                     <details>
-                        <summary>Teaching Experience</summary>
+                        <summary data-i18n="teach-heading">Teaching Experience</summary>
                         <div class="collapsible-content">
                             <div class="item">
                                 <div class="meta">Sep 2025 – Jun 2026 · Prague</div>
-                                <strong>Teacher of Informatics, ZŠ Hovorčovická 11</strong>
-                                <span>Led 17 classes for students aged 9–15.</span>
+                                <strong data-i18n="teach-teacher">Teacher of Informatics, ZŠ Hovorčovická 11</strong>
+                                <span data-i18n="teach-teacher-desc">Led 17 classes for students aged 9–15.</span>
                             </div>
                             <div class="item">
                                 <div class="meta">Sep 2022 – Dec 2023 · Prague</div>
-                                <strong>Math Tutor, Populo</strong>
-                                <span>Guided 7 students (ages 12–20) through mathematics topics.</span>
+                                <strong data-i18n="teach-tutor-populo">Math Tutor, Populo</strong>
+                                <span data-i18n="teach-tutor-populo-desc">Guided 7 students (ages 12–20) through mathematics topics.</span>
                             </div>
                             <div class="item">
                                 <div class="meta">Dec 2020 – Jun 2021 · České Budějovice</div>
-                                <strong>Math Tutor, Private Tutoring</strong>
-                                <span>Supported 4 students preparing for exams and competitions.</span>
+                                <strong data-i18n="teach-tutor-private">Math Tutor, Private Tutoring</strong>
+                                <span data-i18n="teach-tutor-private-desc">Supported 4 students preparing for exams and competitions.</span>
                             </div>
                             <div class="item">
                                 <div class="meta">Sep 2020 · České Budějovice</div>
-                                <strong>Volunteer Math Tutor</strong>
-                                <span>Created tailored learning plans for a 15-year-old student with autism and
+                                <strong data-i18n="teach-volunteer">Volunteer Math Tutor</strong>
+                                <span data-i18n="teach-volunteer-desc">Created tailored learning plans for a 15-year-old student with autism and
                                     ADHD.</span>
                             </div>
                         </div>
@@ -891,19 +936,19 @@
 
                 <section id="volunteering" class="collapsible" data-nav-title="Volunteering">
                     <details>
-                        <summary>Volunteering</summary>
+                        <summary data-i18n="vol-heading">Volunteering</summary>
                         <div class="collapsible-content">
                             <div class="item">
-                                <div class="meta">Feb 2020 · Karlovy Vary</div><strong>Caregiver, Coronavirus Unit,
+                                <div class="meta">Feb 2020 · Karlovy Vary</div><strong data-i18n="vol-caregiver">Caregiver, Coronavirus Unit,
                                     KKN</strong>
                             </div>
                             <div class="item">
-                                <div class="meta">Feb 2020 – Aug 2020 · Týn nad Vltavou</div><strong>Website Consultant,
+                                <div class="meta">Feb 2020 – Aug 2020 · Týn nad Vltavou</div><strong data-i18n="vol-website">Website Consultant,
                                     Municipal
                                     Office</strong>
                             </div>
                             <div class="item">
-                                <div class="meta">2018 – 2021 · Prague</div><strong>Minecraft Cup Organiser,
+                                <div class="meta">2018 – 2021 · Prague</div><strong data-i18n="vol-minecraft">Minecraft Cup Organiser,
                                     Microsoft</strong>
                             </div>
                         </div>
@@ -916,7 +961,7 @@
 
             <aside class="sticky-panel">
                 <section id="skills">
-                    <h2>Skills</h2>
+                    <h2 data-i18n="skills-heading">Skills</h2>
                     <div class="chips">
                         <span class="chip">Data Science</span>
                         <span class="chip">Optimization</span>
@@ -932,19 +977,19 @@
                         <span class="chip">Process Modeling</span>
                     </div>
                     <details open style="margin-top: 1.25rem;">
-                        <summary>Programming & Scripting</summary>
-                        <p><strong>Proficient:</strong> C/C++, Kotlin, Python, Bash</p>
-                        <p><strong>Familiar:</strong> Julia, R, PostgreSQL</p>
+                        <summary data-i18n="skills-prog">Programming & Scripting</summary>
+                        <p><strong data-i18n="skills-proficient">Proficient:</strong> C/C++, Kotlin, Python, Bash</p>
+                        <p><strong data-i18n="skills-familiar">Familiar:</strong> Julia, R, PostgreSQL</p>
                     </details>
                     <details open>
-                        <summary>Tools & Libraries</summary>
+                        <summary data-i18n="skills-tools">Tools & Libraries</summary>
                         <p>Git + CI/CD (Lab, Hub, Bitbucket), Conda, Docker, Jupyter, Atlassian</p>
-                        <p><strong>Libraries:</strong> mlflow, pytorch, pandas, scikit-learn, huggingface, fastapi,
+                        <p><strong data-i18n="skills-libraries">Libraries:</strong> mlflow, pytorch, pandas, scikit-learn, huggingface, fastapi,
                             matplotlib, opencv</p>
                     </details>
                     <details open>
-                        <summary>Languages</summary>
-                        <p><strong>Fluent:</strong> English (IELTS 7.5, C1) · <strong>Intermediate:</strong> German</p>
+                        <summary data-i18n="skills-languages">Languages</summary>
+                        <p><strong data-i18n="skills-fluent">Fluent:</strong> English (IELTS 7.5, C1) · <strong data-i18n="skills-intermediate">Intermediate:</strong> German</p>
                     </details>
                 </section>
             </aside>
@@ -1098,6 +1143,351 @@
                 printMediaQuery.addListener(handlePrintChange);
             }
         }
+    </script>
+    <script>
+        (function () {
+            "use strict";
+
+            const I18N = {
+                en: {
+                    "tagline": "Applied ML and optimization engineer with 3+ years of experience in recommender systems, machine learning, optimization, computer vision, and robotics.",
+                    "online-resume": "Full interactive CV: <a href=\"https://tomnovota.github.io/resume/\">tomnovota.github.io/resume</a>",
+                    "download-pdf-btn": "Download printable PDF",
+                    "exp-heading": "Professional Experience",
+                    "job-ai-detem": "LLMs & Web Development, AI dětem",
+                    "ai-detem-1": "Tuned prompts for an interactive student chatbot, improving response quality and reliability.",
+                    "ai-detem-2": "Built a web app for managing questionnaires and data-collection pipelines.",
+                    "ai-detem-3": "Designed a tool that digitizes and auto-corrects student worksheets.",
+                    "job-ecom": "AI Training for Employees, ECOM s.r.o.",
+                    "ecom-1": "Designed and delivered practical AI upskilling workshops.",
+                    "job-heli": "Business Analysis & Solution Proposal, Heli Food Fresh a.s.",
+                    "heli-1": "Analyzed a visual-inspection problem and recommended a computer-vision solution.",
+                    "job-blindspot": "AI Developer, Blindspot Solutions",
+                    "blindspot-1": "Solved a complex manufacturing scheduling problem with state-of-the-art optimization techniques (Kotlin).",
+                    "blindspot-2": "Worked directly with the client to resolve data inconsistencies in a cross-functional team.",
+                    "job-bosch": "AI Intern, Bosch",
+                    "bosch-1": "Got familiar with AI applications in manufacturing environment.",
+                    "bosch-2": "Worked on small tasks like creating a Python GUI and improving transfer-learning scripts.",
+                    "projects-heading": "Projects Portfolio",
+                    "projects-note": "Full collection on <a href=\"https://github.com/tomnovota/resume/tree/main/portfolio\">GitHub</a>.",
+                    "proj-pml": "Evaluation of TopK and Gated TopK sparsification in the CompresSAE framework.",
+                    "proj-mvi": "Fine-tuned a Czech RoBERTa model on the Czech National Corpus to classify text age-appropriateness.",
+                    "proj-mlp": "End-to-end CRISP-DM project forecasting demographic trends from 50 years of data.",
+                    "proj-scr": "Statistical forecasting of accommodation-occupancy trends.",
+                    "proj-kop": "Simulated-annealing variant with adaptive mechanisms for weighted Boolean satisfiability.",
+                    "proj-svz": "Computer-vision pipeline combining thermal and RGB data for projective transforms, segmentation, and real-unit measurement.",
+                    "edu-heading": "Education",
+                    "edu-exchange": "Exchange Semester",
+                    "coursework-heading": "Notable Extra Coursework",
+                    "pub-heading": "Publications",
+                    "dev-heading": "Self-Development",
+                    "honors-heading": "Honors & Awards",
+                    "honors-1": "Recognized for publishing peer-reviewed research.",
+                    "hobbies-heading": "Hobbies",
+                    "hobbies-1": "Team sports · Traveling · Cuban Salsa · Piano",
+                    "other-heading": "Other Work Experience",
+                    "other-it-tech": "IT Technician, SP-IT Limited",
+                    "other-it-tech-desc": "Diagnosed hardware/software issues, performed repairs, prophylaxis, and network maintenance.",
+                    "other-support": "Technical Support Operator, Starnet",
+                    "other-support-desc": "Resolved customer connectivity problems and coordinated service escalations.",
+                    "other-parcel": "Parcel Delivery Driver, Česká pošta",
+                    "other-fastfood": "Fast Food Delivery Driver, Prorozvoz",
+                    "other-boat": "Boat Rental Driver, Petr Putzer",
+                    "other-factory": "Factory Worker, Achilles",
+                    "teach-heading": "Teaching Experience",
+                    "teach-teacher": "Teacher of Informatics, ZŠ Hovorčovická 11",
+                    "teach-teacher-desc": "Led 17 classes for students aged 9–15.",
+                    "teach-tutor-populo": "Math Tutor, Populo",
+                    "teach-tutor-populo-desc": "Guided 7 students (ages 12–20) through mathematics topics.",
+                    "teach-tutor-private": "Math Tutor, Private Tutoring",
+                    "teach-tutor-private-desc": "Supported 4 students preparing for exams and competitions.",
+                    "teach-volunteer": "Volunteer Math Tutor",
+                    "teach-volunteer-desc": "Created tailored learning plans for a 15-year-old student with autism and ADHD.",
+                    "vol-heading": "Volunteering",
+                    "vol-caregiver": "Caregiver, Coronavirus Unit, KKN",
+                    "vol-website": "Website Consultant, Municipal Office",
+                    "vol-minecraft": "Minecraft Cup Organiser, Microsoft",
+                    "skills-heading": "Skills",
+                    "skills-prog": "Programming & Scripting",
+                    "skills-proficient": "Proficient:",
+                    "skills-familiar": "Familiar:",
+                    "skills-tools": "Tools & Libraries",
+                    "skills-libraries": "Libraries:",
+                    "skills-languages": "Languages",
+                    "skills-fluent": "Fluent:",
+                    "skills-intermediate": "Intermediate:"
+                },
+                de: {
+                    "tagline": "Angewandter ML- und Optimierungsingenieur mit über 3 Jahren Erfahrung in Empfehlungssystemen, maschinellem Lernen, Optimierung, Computer Vision und Robotik.",
+                    "online-resume": "Vollständiger interaktiver Lebenslauf: <a href=\"https://tomnovota.github.io/resume/\">tomnovota.github.io/resume</a>",
+                    "download-pdf-btn": "Druckbare PDF herunterladen",
+                    "exp-heading": "Berufserfahrung",
+                    "job-ai-detem": "LLMs & Webentwicklung, AI dětem",
+                    "ai-detem-1": "Prompts für einen interaktiven Schüler-Chatbot optimiert und so Antwortqualität und Zuverlässigkeit verbessert.",
+                    "ai-detem-2": "Eine Web-App zur Verwaltung von Fragebögen und Datenerfassungs-Pipelines entwickelt.",
+                    "ai-detem-3": "Ein Tool entwickelt, das Schülerarbeitsblätter digitalisiert und automatisch korrigiert.",
+                    "job-ecom": "KI-Schulung für Mitarbeiter, ECOM s.r.o.",
+                    "ecom-1": "Praktische KI-Weiterbildungs-Workshops konzipiert und durchgeführt.",
+                    "job-heli": "Geschäftsanalyse & Lösungsvorschlag, Heli Food Fresh a.s.",
+                    "heli-1": "Ein Problem der visuellen Inspektion analysiert und eine Computer-Vision-Lösung empfohlen.",
+                    "job-blindspot": "KI-Entwickler, Blindspot Solutions",
+                    "blindspot-1": "Ein komplexes Produktions-Planungsproblem mit modernsten Optimierungstechniken gelöst (Kotlin).",
+                    "blindspot-2": "Direkt mit dem Kunden gearbeitet, um Dateninkonsistenzen in einem funktionsübergreifenden Team zu beheben.",
+                    "job-bosch": "KI-Praktikant, Bosch",
+                    "bosch-1": "Mit KI-Anwendungen in der Fertigungsumgebung vertraut gemacht.",
+                    "bosch-2": "An kleineren Aufgaben gearbeitet, z. B. Erstellung einer Python-GUI und Verbesserung von Transfer-Learning-Skripten.",
+                    "projects-heading": "Projektportfolio",
+                    "projects-note": "Vollständige Sammlung auf <a href=\"https://github.com/tomnovota/resume/tree/main/portfolio\">GitHub</a>.",
+                    "proj-pml": "Evaluierung von TopK- und Gated-TopK-Sparsifikation im CompresSAE-Framework.",
+                    "proj-mvi": "Tschechisches RoBERTa-Modell feinabgestimmt, um die Altersangemessenheit von Texten zu klassifizieren (Tschechisches Nationalkorpus).",
+                    "proj-mlp": "End-to-End-CRISP-DM-Projekt zur Prognose demografischer Trends aus 50 Jahren Daten.",
+                    "proj-scr": "Statistische Prognose von Belegungstrends in Unterkünften.",
+                    "proj-kop": "Simulated-Annealing-Variante mit adaptiven Mechanismen für gewichtete Boolesche Erfüllbarkeit.",
+                    "proj-svz": "Computer-Vision-Pipeline, die Wärme- und RGB-Daten für projektive Transformationen, Segmentierung und Messung in realen Einheiten kombiniert.",
+                    "edu-heading": "Ausbildung",
+                    "edu-exchange": "Austauschsemester",
+                    "coursework-heading": "Bemerkenswerte Zusatzkurse",
+                    "pub-heading": "Publikationen",
+                    "dev-heading": "Weiterbildung",
+                    "honors-heading": "Auszeichnungen",
+                    "honors-1": "Für die Veröffentlichung von Peer-Review-Forschung ausgezeichnet.",
+                    "hobbies-heading": "Hobbys",
+                    "hobbies-1": "Teamsport · Reisen · Kubanische Salsa · Klavier",
+                    "other-heading": "Weitere Berufserfahrung",
+                    "other-it-tech": "IT-Techniker, SP-IT Limited",
+                    "other-it-tech-desc": "Hardware-/Softwareprobleme diagnostiziert, Reparaturen, Wartung und Netzwerkpflege durchgeführt.",
+                    "other-support": "Technischer Support-Mitarbeiter, Starnet",
+                    "other-support-desc": "Kundenverbindungsprobleme gelöst und Serviceeskalationen koordiniert.",
+                    "other-parcel": "Paketzusteller, Česká pošta",
+                    "other-fastfood": "Fast-Food-Lieferfahrer, Prorozvoz",
+                    "other-boat": "Bootsverleih-Fahrer, Petr Putzer",
+                    "other-factory": "Fabrikarbeiter, Achilles",
+                    "teach-heading": "Lehrerfahrung",
+                    "teach-teacher": "Informatiklehrer, ZŠ Hovorčovická 11",
+                    "teach-teacher-desc": "17 Klassen für Schüler im Alter von 9–15 Jahren geleitet.",
+                    "teach-tutor-populo": "Mathe-Nachhilfelehrer, Populo",
+                    "teach-tutor-populo-desc": "7 Schüler (12–20 Jahre) durch Mathematikthemen begleitet.",
+                    "teach-tutor-private": "Mathe-Nachhilfelehrer, privat",
+                    "teach-tutor-private-desc": "4 Schüler bei Prüfungs- und Wettbewerbsvorbereitung unterstützt.",
+                    "teach-volunteer": "Ehrenamtlicher Mathe-Nachhilfelehrer",
+                    "teach-volunteer-desc": "Individuelle Lernpläne für einen 15-jährigen Schüler mit Autismus und ADHS erstellt.",
+                    "vol-heading": "Ehrenamt",
+                    "vol-caregiver": "Pflegekraft, Coronavirus-Station, KKN",
+                    "vol-website": "Website-Berater, Gemeindeamt",
+                    "vol-minecraft": "Minecraft-Cup-Organisator, Microsoft",
+                    "skills-heading": "Kenntnisse",
+                    "skills-prog": "Programmierung & Skripting",
+                    "skills-proficient": "Geübt:",
+                    "skills-familiar": "Vertraut:",
+                    "skills-tools": "Tools & Bibliotheken",
+                    "skills-libraries": "Bibliotheken:",
+                    "skills-languages": "Sprachen",
+                    "skills-fluent": "Fließend:",
+                    "skills-intermediate": "Mittelstufe:"
+                },
+                cs: {
+                    "tagline": "Inženýr aplikovaného strojového učení a optimalizace s více než 3 lety zkušeností v doporučovacích systémech, strojovém učení, optimalizaci, počítačovém vidění a robotice.",
+                    "online-resume": "Plně interaktivní životopis: <a href=\"https://tomnovota.github.io/resume/\">tomnovota.github.io/resume</a>",
+                    "download-pdf-btn": "Stáhnout PDF k tisku",
+                    "exp-heading": "Pracovní zkušenosti",
+                    "job-ai-detem": "LLM a vývoj webu, AI dětem",
+                    "ai-detem-1": "Ladil prompty pro interaktivního studentského chatbota, zlepšil kvalitu a spolehlivost odpovědí.",
+                    "ai-detem-2": "Postavil webovou aplikaci pro správu dotazníků a sběr dat.",
+                    "ai-detem-3": "Navrhl nástroj, který digitalizuje a automaticky opravuje studentské pracovní listy.",
+                    "job-ecom": "Školení AI pro zaměstnance, ECOM s.r.o.",
+                    "ecom-1": "Navrhl a vedl praktické workshopy pro zvýšení dovedností v AI.",
+                    "job-heli": "Obchodní analýza a návrh řešení, Heli Food Fresh a.s.",
+                    "heli-1": "Analyzoval problém vizuální inspekce a doporučil řešení založené na počítačovém vidění.",
+                    "job-blindspot": "AI vývojář, Blindspot Solutions",
+                    "blindspot-1": "Vyřešil komplexní výrobní plánovací problém pomocí moderních optimalizačních technik (Kotlin).",
+                    "blindspot-2": "Přímo spolupracoval s klientem na odstranění datových nesrovnalostí v mezifunkčním týmu.",
+                    "job-bosch": "AI stážista, Bosch",
+                    "bosch-1": "Seznámil se s aplikacemi AI ve výrobním prostředí.",
+                    "bosch-2": "Pracoval na menších úkolech, např. vytvoření Python GUI a vylepšení skriptů pro transfer learning.",
+                    "projects-heading": "Portfolio projektů",
+                    "projects-note": "Kompletní kolekce na <a href=\"https://github.com/tomnovota/resume/tree/main/portfolio\">GitHubu</a>.",
+                    "proj-pml": "Vyhodnocení sparsifikace TopK a Gated TopK v rámci CompresSAE.",
+                    "proj-mvi": "Doladil český model RoBERTa na Českém národním korpusu pro klasifikaci věkové vhodnosti textu.",
+                    "proj-mlp": "Kompletní CRISP-DM projekt předpovídající demografické trendy z 50 let dat.",
+                    "proj-scr": "Statistické předpovídání trendů obsazenosti ubytování.",
+                    "proj-kop": "Varianta simulovaného žíhání s adaptivními mechanismy pro váženou booleovskou splnitelnost.",
+                    "proj-svz": "Pipeline počítačového vidění kombinující termální a RGB data pro projektivní transformace, segmentaci a měření v reálných jednotkách.",
+                    "edu-heading": "Vzdělání",
+                    "edu-exchange": "Výměnný semestr",
+                    "coursework-heading": "Významné doplňkové kurzy",
+                    "pub-heading": "Publikace",
+                    "dev-heading": "Sebevzdělávání",
+                    "honors-heading": "Ocenění",
+                    "honors-1": "Oceněn za publikování recenzovaného výzkumu.",
+                    "hobbies-heading": "Zájmy",
+                    "hobbies-1": "Týmové sporty · Cestování · Kubánská salsa · Klavír",
+                    "other-heading": "Další pracovní zkušenosti",
+                    "other-it-tech": "IT technik, SP-IT Limited",
+                    "other-it-tech-desc": "Diagnostikoval hardwarové/softwarové problémy, prováděl opravy, údržbu a správu sítě.",
+                    "other-support": "Operátor technické podpory, Starnet",
+                    "other-support-desc": "Řešil problémy s připojením zákazníků a koordinoval eskalace služeb.",
+                    "other-parcel": "Doručovatel balíků, Česká pošta",
+                    "other-fastfood": "Kurýr rychlého občerstvení, Prorozvoz",
+                    "other-boat": "Řidič půjčovny lodí, Petr Putzer",
+                    "other-factory": "Tovární dělník, Achilles",
+                    "teach-heading": "Pedagogické zkušenosti",
+                    "teach-teacher": "Učitel informatiky, ZŠ Hovorčovická 11",
+                    "teach-teacher-desc": "Vedl 17 tříd pro žáky ve věku 9–15 let.",
+                    "teach-tutor-populo": "Doučovatel matematiky, Populo",
+                    "teach-tutor-populo-desc": "Provedl 7 studentů (12–20 let) matematickými tématy.",
+                    "teach-tutor-private": "Doučovatel matematiky, soukromě",
+                    "teach-tutor-private-desc": "Podpořil 4 studenty při přípravě na zkoušky a soutěže.",
+                    "teach-volunteer": "Dobrovolný doučovatel matematiky",
+                    "teach-volunteer-desc": "Vytvořil individuální výukové plány pro 15letého studenta s autismem a ADHD.",
+                    "vol-heading": "Dobrovolnictví",
+                    "vol-caregiver": "Pečovatel, koronavirové oddělení, KKN",
+                    "vol-website": "Konzultant webových stránek, městský úřad",
+                    "vol-minecraft": "Organizátor Minecraft Cupu, Microsoft",
+                    "skills-heading": "Dovednosti",
+                    "skills-prog": "Programování a skriptování",
+                    "skills-proficient": "Zkušený:",
+                    "skills-familiar": "Znalý:",
+                    "skills-tools": "Nástroje a knihovny",
+                    "skills-libraries": "Knihovny:",
+                    "skills-languages": "Jazyky",
+                    "skills-fluent": "Plynně:",
+                    "skills-intermediate": "Mírně pokročilý:"
+                },
+                zh: {
+                    "tagline": "擁有 3 年以上經驗的應用機器學習與最佳化工程師，專精於推薦系統、機器學習、最佳化、電腦視覺與機器人技術。",
+                    "online-resume": "完整互動式履歷：<a href=\"https://tomnovota.github.io/resume/\">tomnovota.github.io/resume</a>",
+                    "download-pdf-btn": "下載可列印的 PDF",
+                    "exp-heading": "工作經驗",
+                    "job-ai-detem": "大型語言模型與網頁開發，AI dětem",
+                    "ai-detem-1": "調校互動式學生聊天機器人的提示詞，提升回覆品質與可靠性。",
+                    "ai-detem-2": "建置用於管理問卷與資料收集流程的網頁應用程式。",
+                    "ai-detem-3": "設計可數位化並自動批改學生作業單的工具。",
+                    "job-ecom": "員工 AI 培訓，ECOM s.r.o.",
+                    "ecom-1": "設計並交付實用的 AI 技能提升工作坊。",
+                    "job-heli": "商業分析與解決方案提案，Heli Food Fresh a.s.",
+                    "heli-1": "分析視覺檢測問題，並建議以電腦視覺為基礎的解決方案。",
+                    "job-blindspot": "AI 開發工程師，Blindspot Solutions",
+                    "blindspot-1": "以最先進的最佳化技術解決複雜的製造排程問題（Kotlin）。",
+                    "blindspot-2": "與客戶直接合作，在跨職能團隊中解決資料不一致的問題。",
+                    "job-bosch": "AI 實習生，Bosch",
+                    "bosch-1": "熟悉製造環境中的 AI 應用。",
+                    "bosch-2": "處理小型任務，例如建立 Python GUI 與改良遷移學習腳本。",
+                    "projects-heading": "專案作品集",
+                    "projects-note": "完整收藏於 <a href=\"https://github.com/tomnovota/resume/tree/main/portfolio\">GitHub</a>。",
+                    "proj-pml": "評估 CompresSAE 框架中的 TopK 與 Gated TopK 稀疏化。",
+                    "proj-mvi": "以捷克國家語料庫微調捷克 RoBERTa 模型，分類文本的年齡適宜性。",
+                    "proj-mlp": "端到端的 CRISP-DM 專案，以 50 年資料預測人口趨勢。",
+                    "proj-scr": "對住宿入住率趨勢進行統計預測。",
+                    "proj-kop": "具備自適應機制的模擬退火變體，用於加權布林可滿足性問題。",
+                    "proj-svz": "結合熱成像與 RGB 資料的電腦視覺流程，用於投影轉換、分割與實際單位量測。",
+                    "edu-heading": "學歷",
+                    "edu-exchange": "交換學期",
+                    "coursework-heading": "重要額外課程",
+                    "pub-heading": "出版物",
+                    "dev-heading": "自我進修",
+                    "honors-heading": "榮譽與獎項",
+                    "honors-1": "因發表經同儕審查的研究而獲表揚。",
+                    "hobbies-heading": "興趣",
+                    "hobbies-1": "團隊運動 · 旅行 · 古巴騷莎 · 鋼琴",
+                    "other-heading": "其他工作經驗",
+                    "other-it-tech": "IT 技術員，SP-IT Limited",
+                    "other-it-tech-desc": "診斷硬體／軟體問題，執行維修、保養與網路維護。",
+                    "other-support": "技術支援專員，Starnet",
+                    "other-support-desc": "解決客戶連線問題並協調服務升級。",
+                    "other-parcel": "包裹外送員，Česká pošta",
+                    "other-fastfood": "速食外送員，Prorozvoz",
+                    "other-boat": "租船駕駛，Petr Putzer",
+                    "other-factory": "工廠作業員，Achilles",
+                    "teach-heading": "教學經驗",
+                    "teach-teacher": "資訊科技教師，ZŠ Hovorčovická 11",
+                    "teach-teacher-desc": "帶領 17 個班級，學生年齡 9–15 歲。",
+                    "teach-tutor-populo": "數學家教，Populo",
+                    "teach-tutor-populo-desc": "指導 7 名學生（12–20 歲）數學主題。",
+                    "teach-tutor-private": "數學家教，私人授課",
+                    "teach-tutor-private-desc": "協助 4 名學生準備考試與競賽。",
+                    "teach-volunteer": "志願數學家教",
+                    "teach-volunteer-desc": "為一名患有自閉症與過動症的 15 歲學生設計個別化學習計畫。",
+                    "vol-heading": "志願服務",
+                    "vol-caregiver": "照護人員，新冠病房，KKN",
+                    "vol-website": "網站顧問，市政辦公室",
+                    "vol-minecraft": "Minecraft Cup 主辦人，Microsoft",
+                    "skills-heading": "技能",
+                    "skills-prog": "程式設計與腳本",
+                    "skills-proficient": "精通：",
+                    "skills-familiar": "熟悉：",
+                    "skills-tools": "工具與函式庫",
+                    "skills-libraries": "函式庫：",
+                    "skills-languages": "語言",
+                    "skills-fluent": "流利：",
+                    "skills-intermediate": "中級："
+                }
+            };
+
+            const nav = document.querySelector("nav[data-auto-nav]");
+            const sections = Array.from(document.querySelectorAll("main section[id]"));
+            const langButtons = Array.from(document.querySelectorAll(".lang-switcher button[data-lang]"));
+
+            const getSectionLabel = (section) => {
+                const heading = section.querySelector("h1, h2, h3, summary");
+                return heading ? heading.textContent.trim() : section.id;
+            };
+
+            const buildNav = () => {
+                if (!nav) return;
+                const fragment = document.createDocumentFragment();
+                sections.forEach((section) => {
+                    const label = getSectionLabel(section);
+                    if (!label) return;
+                    const link = document.createElement("a");
+                    link.href = "#" + section.id;
+                    link.textContent = label;
+                    fragment.appendChild(link);
+                });
+                nav.textContent = "";
+                nav.appendChild(fragment);
+                const links = Array.from(nav.querySelectorAll("a"));
+                links.forEach((link) => {
+                    link.addEventListener("click", () => {
+                        links.forEach((item) => item.classList.remove("active"));
+                        link.classList.add("active");
+                    });
+                });
+                if (links[0]) links[0].classList.add("active");
+            };
+
+            const applyLanguage = (lang) => {
+                if (!I18N[lang]) lang = "en";
+                const dict = I18N[lang];
+
+                document.documentElement.lang = (lang === "zh") ? "zh-Hant" : lang;
+
+                document.querySelectorAll("[data-i18n]").forEach((el) => {
+                    const key = el.getAttribute("data-i18n");
+                    if (dict[key] != null) el.textContent = dict[key];
+                });
+                document.querySelectorAll("[data-i18n-html]").forEach((el) => {
+                    const key = el.getAttribute("data-i18n-html");
+                    if (dict[key] != null) el.innerHTML = dict[key];
+                });
+
+                langButtons.forEach((btn) => {
+                    btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
+                });
+
+                buildNav();
+
+                try { localStorage.setItem("lang", lang); } catch (e) { /* ignore */ }
+            };
+
+            langButtons.forEach((btn) => {
+                btn.addEventListener("click", () => applyLanguage(btn.getAttribute("data-lang")));
+            });
+
+            let initialLang = "en";
+            try { initialLang = localStorage.getItem("lang") || "en"; } catch (e) { /* ignore */ }
+            if (!I18N[initialLang]) initialLang = "en";
+            applyLanguage(initialLang);
+        })();
     </script>
 </body>
 
