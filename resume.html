@@ -88,10 +88,11 @@
         }
 
         .lang-switcher {
+            /* temporarily hidden until translations are corrected */
+            display: none;
             position: absolute;
             top: 1rem;
             right: 1rem;
-            display: flex;
             gap: .4rem;
             z-index: 20;
         }
@@ -677,7 +678,7 @@
             </nav>
             <div class="header-content">
                 <h1>Tomáš Novotný</h1>
-                <p class="tagline" data-i18n="tagline">Applied ML and optimization engineer with 3+ years of experience
+                <p class="tagline" data-i18n="tagline">Applied ML and optimization engineer with years of experience
                     in recommender systems, machine learning, optimization, computer vision, and robotics. Solid
                     knowledge and problem-solving background with proficient AI-usage skills — using LLMs to solve
                     difficult or previously unseen tasks while validating outputs and steering the AI correctly.
@@ -1201,7 +1202,7 @@
 
             const I18N = {
                 en: {
-                    "tagline": "Applied ML and optimization engineer with 3+ years of experience in recommender systems, machine learning, optimization, computer vision, and robotics. Solid knowledge and problem-solving background with proficient AI-usage skills — using LLMs to solve difficult or previously unseen tasks while validating outputs and steering the AI correctly.",
+                    "tagline": "Applied ML and optimization engineer with years of experience in recommender systems, machine learning, optimization, computer vision, and robotics. Solid knowledge and problem-solving background with proficient AI-usage skills — using LLMs to solve difficult or previously unseen tasks while validating outputs and steering the AI correctly.",
                     "online-resume": "Full interactive CV: <a href=\"https://tomnovota.github.io/resume/\">tomnovota.github.io/resume</a>",
                     "download-pdf-btn": "Download printable PDF",
                     "exp-heading": "Professional Experience",
@@ -1558,10 +1559,8 @@
                 btn.addEventListener("click", () => applyLanguage(btn.getAttribute("data-lang")));
             });
 
-            let initialLang = "en";
-            try { initialLang = localStorage.getItem("lang") || "en"; } catch (e) { /* ignore */ }
-            if (!I18N[initialLang]) initialLang = "en";
-            applyLanguage(initialLang);
+            // Language switcher temporarily hidden — force English until translations are corrected.
+            applyLanguage("en");
         })();
     </script>
 </body>
